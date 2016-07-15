@@ -1,0 +1,53 @@
+$seafoam: #C4DFE6;
+$deepAqua: #003B46;
+$ocean: #07575B;
+$wave: #66A5AD;
+$textWhite: #f3f2ff;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: $seafoam;
+}
+
+.header {
+  text-align: center;
+  background-color: $deepAqua;
+  height: 75px;
+  h1 {
+    font-family: 'Norwester';
+    height: 100%;
+    color: $textWhite;
+    text-shadow: 2px 2px black;
+    &:before {
+      content: '';
+      display: inline-block;
+      vertical-align: middle;  
+      height: 100%; 
+    }
+  }
+}
+
+.navbar {
+  text-align: center;
+  background-color: $ocean;
+  li {
+    font-size: 1.1em;
+    color: $textWhite;
+    display: inline-block;
+    margin-left: 15px;
+    padding: .3em;
+  }
+}
+
+.posting {
+  padding: 0em 40em 0em 40em;
+  h1 {
+  }
+  h4 {
+    padding: 0 0 .3em 2em
+  }
+}

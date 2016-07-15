@@ -1,29 +1,74 @@
-var webpack = require('webpack');
-var path = require('path');
+const path = require('path');
+const webpack = require('webpack');
+const merge = require('webpack-merge');
+const NpmInstallPlugin = require('npm-install-webpack-plugin');
 
-var BUILD_DIR = path.resolve(__dirname, 'src/client/public');
-var APP_DIR = path.resolve(__dirname, 'src/client/app');
+const TARGET = process.env.npm_lifecycle_event;
+const PATHS = {
+  app: path.join(__dirname, 'app'),
+  build: path.join(__dirname, 'build')
+};
 
-var config = {
-  entry: APP_DIR + '/index.jsx',
+process.env.BABEL_ENV = TARGET;
+
+const common = {
+  entry: {
+    app: PATHS.app
+  },
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
   output: {
-    path: BUILD_DIR,
+    path: PATHS.build,
     filename: 'bundle.js'
   },
-  module : {
-    loaders : [
+  module: {
+    loaders: [
       {
-        test : /\.jsx?/,
-        include : APP_DIR,
-        loader : 'babel'
+        test: /\.scss$/,
+        loaders: ["style", "css", "sass"],
+        include: PATHS.app,
+      },
+      //{
+        //test: /\.css$/,
+        //loaders: ['style', 'css'],
+        //include: PATHS.app,
+      //},
+      {
+        test: /\.jsx?$/,
+        loaders: ['babel?cacheDirectory'],
+        include: PATHS.app,
       },
       {
-        test: /\.styl$/,
-        loaders: ['style', 'css', 'stylus'],
-        include: PATHS.style
+        test: /\.json$/, loader: 'json' 
       }
     ]
   }
+};
+
+// Default configuration
+if(TARGET === 'start' || !TARGET) {
+  module.exports = merge(common, {
+    devtool: 'eval-source-map',
+    devServer: {
+      contentBase: PATHS.build,
+      historyApiFallback: true,
+      hot: true,
+      inline: true,
+      progress: true,
+      stats: 'errors-only',
+      host: process.env.HOST,
+      port: process.env.PORT
+    },
+    plugins: [
+      new webpack.HotModuleReplacementPlugin(),
+      new NpmInstallPlugin({
+        save: true // --save
+      })
+    ]
+  });
 }
 
-module.exports = config;
+if(TARGET === 'build') {
+  module.exports = merge(common, {});
+}
