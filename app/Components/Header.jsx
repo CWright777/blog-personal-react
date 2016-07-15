@@ -24,10 +24,6 @@ export default class Header extends Component {
             <li>Technologies</li>
           </ul>
         </div>
-        <button
-          onClick={this.addPost.bind(this)}>
-          daad
-        </button>
       </div>
     )
   }

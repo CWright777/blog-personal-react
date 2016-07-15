@@ -10,7 +10,7 @@ import reducer from './reducer';
 import * as actionCreators from './action_creators';
 import App from './components/App.jsx';
 import { BloggingContainer } from './components/Blog.jsx';
-import { PostingArea } from './components/PostingArea.jsx'
+import { PostingArea} from './components/PostingArea.jsx'
 
 const loggerMiddleware = createLogger()
 

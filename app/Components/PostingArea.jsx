@@ -1,15 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import Header from './Header.jsx';
+import RichEditor from './RichEditor.jsx';
 import { connect } from 'react-redux';
-import {
-  convertFromRaw,
-  convertToRaw,
-  CompositeDecorator,
-  ContentState,
-  Editor,
-  EditorState,
-  Entity,
-} from 'draft-js'
 
 export class PostingArea extends Component {
   constructor(props) {
@@ -21,6 +13,7 @@ export class PostingArea extends Component {
     return(
       <div>
         <Header />
+        <RichEditor />
     </div>
     )
   }
