@@ -5,6 +5,7 @@ const api = {
   },
   addPost(post){
     const url = 'https://personal-site-ade56.firebaseio.com/post.json';
+    console.log('d')
     return fetch(url, {
       method: 'post',
       body: JSON.stringify(post)

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import Header from './Header.jsx';
 import RichEditor from './RichEditor.jsx';
 import { connect } from 'react-redux';
+import { createPost } from '../reducer'
 
 export class PostingArea extends Component {
   constructor(props) {
@@ -13,16 +14,24 @@ export class PostingArea extends Component {
     return(
       <div>
         <Header />
-        <RichEditor />
+        <RichEditor submitPost={(post) => createPost(post)(this.props.dispatch)}/>
     </div>
     )
   }
 }
 
-//Posting.propTypes = {
+//PostingArea.propTypes = {
   //posts: PropTypes.object.isRequired,
 //}
-//function mapStateToProps(state) {
-  //return {}
-//}
-//export const PostingAreaContainer = connect(mapStateToProps)(PostingArea)
+
+function mapStateToProps(state) {
+  const {
+    isFetching
+  } = state || {
+    isFetching: true
+  }
+  return {
+    isFetching
+  }
+}
+export const PostingAreaContainer = connect(mapStateToProps)(PostingArea)

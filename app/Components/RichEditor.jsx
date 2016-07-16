@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import api from '../Util/api'
 import {
   Editor,
   EditorState,
   RichUtils,
+  convertFromRaw,
   convertToRaw,
   DefaultDraftBlockRenderMap,
 } from 'draft-js'
@@ -23,8 +23,14 @@ export default class RichEditor extends Component {
     this.toggleBlockType = (type) => this._toggleBlockType(type);
     this.toggleInlineStyle = (style) => this._toggleInlineStyle(style);
     this.createPost = () => {
-      const content = this.state.editorState.getCurrentContent();
-      api.addPost(content)
+      const content = convertToRaw(this.state.editorState.getCurrentContent());
+      const payload = {
+        createdAt: Date.now(),
+        subject: "React",
+        title: "Web development is rad",
+        content
+      }
+      props.submitPost(payload)
     }
   }
 
@@ -100,6 +106,10 @@ export default class RichEditor extends Component {
       </div>
     );
   }
+}
+
+RichEditor.propTypes = {
+  submitPost: PropTypes.func
 }
 
 const styles = {

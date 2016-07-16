@@ -21,6 +21,21 @@ export function fetchPosts() {
   }
 }
 
+export function requestCreatePost(postInfo) {
+  console.log('sadds')
+  return {
+    type: 'REQUEST_CREATE_POST',
+    postInfo
+  }
+}
+
+export function responseCreatePost(postInfo) {
+  return {
+    type: 'RESPONSE_CREATE_POST',
+    postInfo
+  }
+}
+
 function shouldFetchPosts(state) {
   const posts = state.posts
   if (!posts) {

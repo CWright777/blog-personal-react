@@ -10,7 +10,7 @@ import reducer from './reducer';
 import * as actionCreators from './action_creators';
 import App from './components/App.jsx';
 import { BloggingContainer } from './components/Blog.jsx';
-import { PostingArea} from './components/PostingArea.jsx'
+import { PostingAreaContainer } from './components/PostingArea.jsx'
 
 const loggerMiddleware = createLogger()
 
@@ -24,7 +24,7 @@ const store = createStore(
 
 const routes = <Route component={App}>
   <Route path="/" component={BloggingContainer}/>
-  <Route path="/post" component={PostingArea}/>
+  <Route path="/post" component={PostingAreaContainer}/>
 </Route>;
 
 ReactDOM.render(
