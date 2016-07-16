@@ -4,6 +4,9 @@ $ocean: #07575B;
 $wave: #66A5AD;
 $textWhite: #f3f2ff;
 
+@import "bourbon";
+@import "~bourbon-neat/app/assets/stylesheets/neat";
+
 * {
   margin: 0;
   padding: 0;
@@ -44,7 +47,9 @@ body {
 }
 
 .posting {
-  padding: 0em 40em 0em 40em;
+  @include span-columns(6);
+  @include shift(3);
+  font-size: modular-scale(0);
   h1 {
   }
   h4 {

@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import Post from './Post'
 
+
 export default class Posting extends Component {
   render(){
     const posts = this.props.posts;

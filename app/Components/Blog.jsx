@@ -19,7 +19,9 @@ export class Blog extends Component {
     return (
     <div>
       <Header />
-      <Posting posts={this.props.posts || {}} />
+      <div className="container">
+        <Posting posts={this.props.posts || {}} />
+      </div>
     </div>
     )
   }
