@@ -3,10 +3,12 @@ $deepAqua: #003B46;
 $ocean: #07575B;
 $wave: #66A5AD;
 $textWhite: #f3f2ff;
+$fa-font-path: "../node_modules/font-awesome/fonts";
 
 @import "bourbon";
 @import "~bourbon-neat/app/assets/stylesheets/neat";
 @import url(https://fonts.gstatic.com/s/opensans/v13/k3k702ZOKiLJc3WVjuplzBampu5_7CjHW5spxoeN3Vs.woff2);
+@import '~font-awesome/scss/font-awesome.scss';
 
 * {
   margin: 0;
@@ -22,11 +24,14 @@ body {
   background-color: $deepAqua;
   height: 100px;
   h1 {
-    text-align: left;
+    text-align: right;
     height: 100%;
     color: $textWhite;
     text-shadow: 2px 2px black;
     font-size: 2em;
+    span {
+      margin-right: 30px;
+    }
     &:before {
       content: '';
       display: inline-block;

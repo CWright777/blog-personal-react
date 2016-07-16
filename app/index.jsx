@@ -1,7 +1,9 @@
 import './main.scss';
+import 'font-awesome/css/font-awesome.css'
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Route, hashHistory} from 'react-router';
+import {Router, Route, useRouterHistory} from 'react-router';
+import { createHashHistory } from 'history'
 import { createStore, applyMiddleware } from 'redux';
 import {Provider} from 'react-redux';
 import thunkMiddleware from 'redux-thunk'
@@ -12,6 +14,7 @@ import App from './components/App.jsx';
 import { BloggingContainer } from './components/Blog.jsx';
 import { PostingAreaContainer } from './components/PostingArea.jsx'
 
+const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })
 const loggerMiddleware = createLogger()
 
 const store = createStore(
@@ -29,7 +32,7 @@ const routes = <Route component={App}>
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={hashHistory}>{routes}</Router>
+    <Router history={appHistory}>{routes}</Router>
   </Provider>,
   document.getElementById('app')
 );

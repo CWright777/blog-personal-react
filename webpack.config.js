@@ -1,8 +1,8 @@
 const path = require('path');
-const webpack = require('webpack');
+const Webpack = require('webpack');
 const merge = require('webpack-merge');
 const NpmInstallPlugin = require('npm-install-webpack-plugin');
-const neat = require('node-neat').includePaths.concat('./node_modules/breakpoint-sass/stylesheets/')
+const Neat = require('node-neat').includePaths.concat('./node_modules/breakpoint-sass/stylesheets/')
 
 const TARGET = process.env.npm_lifecycle_event;
 const PATHS = {
@@ -30,7 +30,31 @@ const common = {
         //loader: "style!css!sass?includePaths[]= " +  sassPaths,
         //include: PATHS.app,
       //},
-      { test: /\.scss$/, loader: "style!css!sass?includePaths[]=" + [neat[0][0],neat[1]], include: PATHS.app},
+      {
+        test: /\.scss$/,
+        loader: "style!css!sass?includePaths[]=" + [Neat[0][0],Neat[1]],
+        include: PATHS.app
+      },
+      {
+        test: /\.css$/,
+        loader: 'style!css?sourceMap' 
+      },
+      {
+        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=application/font-woff"
+      }, {
+        test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=application/font-woff"
+      }, {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=application/octet-stream"
+      }, {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "file"
+      }, {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=image/svg+xml"
+      },
       //{
         //test: /\.css$/,
         //loaders: ['style', 'css'],
@@ -63,7 +87,7 @@ if(TARGET === 'start' || !TARGET) {
       port: process.env.PORT
     },
     plugins: [
-      new webpack.HotModuleReplacementPlugin(),
+      new Webpack.HotModuleReplacementPlugin(),
       new NpmInstallPlugin({
         save: true // --save
       })
