@@ -6,6 +6,7 @@ $textWhite: #f3f2ff;
 
 @import "bourbon";
 @import "~bourbon-neat/app/assets/stylesheets/neat";
+@import url(https://fonts.gstatic.com/s/opensans/v13/k3k702ZOKiLJc3WVjuplzBampu5_7CjHW5spxoeN3Vs.woff2);
 
 * {
   margin: 0;
@@ -14,17 +15,18 @@ $textWhite: #f3f2ff;
 
 body {
   background: $seafoam;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .header {
-  text-align: center;
   background-color: $deepAqua;
-  height: 75px;
+  height: 100px;
   h1 {
-    font-family: 'Norwester';
+    text-align: left;
     height: 100%;
     color: $textWhite;
     text-shadow: 2px 2px black;
+    font-size: 2em;
     &:before {
       content: '';
       display: inline-block;
@@ -37,6 +39,7 @@ body {
 .navbar {
   text-align: center;
   background-color: $ocean;
+  margin-bottom: 30px;
   li {
     font-size: 1.1em;
     color: $textWhite;
@@ -47,14 +50,29 @@ body {
 }
 
 .posting {
-  @include span-columns(6);
-  @include shift(3);
+  @include span-columns(5.5);
+  @include shift(6.5/2);
   font-size: modular-scale(0);
   h1 {
+    //font-weight: bolder;
+    letter-spacing: -1px;
+    font-size: 1.9em;
+    line-height: 1.2em;
+    text-rendering: optimizeLegibility;
+    text-indent: -2px;
+    margin-bottom: 5px;
   }
   h4 {
-    padding: 0 0 .3em 2em
+    color: #575757;
+    font-size: .9em;
+    padding: 0 0 .3em 2em;
+    margin-bottom: 2px;
   }
+}
+
+.blog-post {
+  border-bottom: 1px dashed $wave;
+  margin-top: 40px;
 }
 
 .RichEditor-root {
@@ -128,8 +146,8 @@ body {
 .ellipsis {
   overflow: hidden;
   position: relative;
-  height: 6em;
-  line-height: 1.2em;
+  height: 6.5em;
+  line-height: 1.3em;
 
   &:before {
     content:"";
@@ -152,7 +170,7 @@ body {
     -moz-box-sizing: content-box;
 
     float: right; position: relative;
-    top: -21px; left: 100%; 
+    top: -17px; left: 100%; 
     width: 7em; margin-left: -7em;
     padding-right: 5px;
     
@@ -181,7 +199,7 @@ body {
 
   i, &:after {
     font-style: normal; 
-    color: blue;
+    color: $deepAqua;
 
     &:before { content: "Read More";}
   }

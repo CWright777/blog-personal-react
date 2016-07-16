@@ -34,13 +34,14 @@ export default class Post extends Component {
     const postData = this.props.postData
     var contentState = editorState.getCurrentContent();
     return(
-      <div>
+      <div className="blog-post">
         <h1>{postData.title}</h1>
         <h4>Clifford Wright • {this.formatDate()} • Subject: {postData.subject}</h4>
         <div>
         </div>
         <div className="ellipsis">
           <Editor 
+            readOnly={true}
             editorState={editorState}
           />
         </div>
