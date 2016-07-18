@@ -15,7 +15,7 @@ export default class Post extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      editorState: EditorState.createWithContent(convertFromRaw(Object.assign({}, props.postData.content, {entityMap: {}}))),
+      editorState: EditorState.createWithContent(convertFromRaw(Object.assign({}, JSON.parse(props.postData.content), {entityMap: {}}))),
       immediateView: false,
     }
     this.formatDate = () => {
@@ -32,10 +32,10 @@ export default class Post extends Component {
     return(
       <div className="blog-post">
         <h1>{postData.title}</h1>
-        <h4>Clifford Wright • {this.formatDate()} • Subject: {postData.subject}</h4>
+        <h4>Clifford Wright • {this.props.postData.created_at} • Subject: {postData.subject}</h4>
         <div>
         </div>
-        <div className={this.state.immediateView ? "" : "ellipsis"}>
+        <div style={{textAlign: "justify"}} className={this.state.immediateView ? "" : "ellipsis"}>
           <Editor 
             readOnly={true}
             editorState={editorState}

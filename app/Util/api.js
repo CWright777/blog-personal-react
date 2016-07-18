@@ -1,3 +1,4 @@
+const fetch = require('isomorphic-fetch')
 const api = {
   getPosts(){
     const url = 'https://personal-site-ade56.firebaseio.com/post.json';
@@ -6,12 +7,13 @@ const api = {
   addPost(post){
     const url = 'http://localhost:3000/posts';
     return fetch(url, {
-      mode: 'no-cors',
+      mode: 'cors',
       method: 'post',
       body: JSON.stringify(post),
       dataType: 'json',
       headers: new Headers({
         'Content-Type': 'application/json',
+        'Accept': 'application/json'
       }),
     }).then((res) => res.json())
   },

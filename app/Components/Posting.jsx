@@ -3,22 +3,14 @@ import Post from './Post'
 
 
 export default class Posting extends Component {
+  constructor(props) {
+    super(props)
+    this.posts = this.props.posts || []
+  }
   render(){
-    const posts = this.props.posts;
-    let postsArr = []
-    for( const post in posts) {
-      postsArr.push({
-        id: post,
-        title: posts[post].title,
-        subject: posts[post].subject,
-        content: posts[post].content,
-        createdAt: posts[post].createdAt
-      })
-    }
     return(
-
       <div className="posting">
-        {postsArr.map((postData, i) =>
+        {this.props.posts.map((postData, i) =>
           <Post key={i} postData={postData} />
         )}
       </div>
@@ -26,6 +18,6 @@ export default class Posting extends Component {
   }
 }
 
-Posting.propTypes = {
-  posts: PropTypes.object.isRequired,
-}
+//Posting.propTypes = {
+  //posts: PropTypes.array.isRequired,
+//}

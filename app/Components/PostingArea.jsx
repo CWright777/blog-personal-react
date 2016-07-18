@@ -11,8 +11,9 @@ export class PostingArea extends Component {
     this.createPost = () => {
       const content = JSON.stringify(convertToRaw(this.refs.richEditor.state.editorState.getCurrentContent()));
       const payload = {
-        title: this.refs.title.value,
+        content,
         subject: this.refs.subject.value,
+        title: this.refs.title.value,
       }
       createPost(payload)(props.dispatch)
     }

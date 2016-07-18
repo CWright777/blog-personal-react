@@ -20,7 +20,7 @@ export class Blog extends Component {
     <div>
       <Header />
       <div className="container">
-        <Posting posts={this.props.posts || {}} />
+        <Posting posts={this.props.posts || []} />
       </div>
     </div>
     )

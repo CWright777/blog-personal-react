@@ -15,7 +15,9 @@ function receivePosts(json) {
 export function fetchPosts() {
   return (dispatch) => {
     dispatch(requestPosts())
-    fetch('https://personal-site-ade56.firebaseio.com/post.json')
+    fetch('http://localhost:3000/posts',{
+      mode: 'cors',
+    })
       .then(response => response.json())
       .then(json => dispatch(receivePosts(json)))
   }

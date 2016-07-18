@@ -15,8 +15,8 @@ class PostsController < ApplicationController
 
   # POST /posts
   def create
-    #p ActiveSupport::JSON.decode(request.raw_post)
-    @post = Post.new(post_params)
+    decoded = ActiveSupport::JSON.decode(request.raw_post)
+    @post = Post.new(decoded)
 
     if @post.save
       render json: @post, status: :created, location: @post
