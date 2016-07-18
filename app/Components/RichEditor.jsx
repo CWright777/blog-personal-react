@@ -30,7 +30,6 @@ export default class RichEditor extends Component {
         title: "Web development is rad",
         content
       }
-      props.submitPost(payload)
     }
   }
 
@@ -97,27 +96,11 @@ export default class RichEditor extends Component {
             spellCheck={true}
           />
         </div>
-        <input
-          onClick={this.createPost}
-          style={styles.button}
-          type="button"
-          value="Add Post"
-        />
       </div>
     );
   }
 }
 
-RichEditor.propTypes = {
-  submitPost: PropTypes.func
-}
-
-const styles = {
-  button: {
-    marginTop: 10,
-    textAlign: 'center',
-  },
-}
 
 const styleMap = {
   CODE: {

@@ -15,18 +15,14 @@ export default class Post extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      editorState: EditorState.createWithContent(convertFromRaw(Object.assign({}, props.postData.content, {entityMap: {}})))
+      editorState: EditorState.createWithContent(convertFromRaw(Object.assign({}, props.postData.content, {entityMap: {}}))),
+      immediateView: false,
     }
-    this.formatDate =() => {
+    this.formatDate = () => {
       return new Date (parseInt(this.props.postData.createdAt)).toDateString()
     }
-    this.formatWords = (content) => {
-      let str = "<div>"
-      for(const key in content.blockMap){
-        str += `<p>${content.blockMap[key].text}</p>`
-        break
-      }
-      return str + '</div>'
+    this.openImmediateView = () => {
+      this.setState({immediateView: !this.state.immediateView})
     }
   }
   render(){
@@ -39,10 +35,18 @@ export default class Post extends Component {
         <h4>Clifford Wright • {this.formatDate()} • Subject: {postData.subject}</h4>
         <div>
         </div>
-        <div className="ellipsis">
+        <div className={this.state.immediateView ? "" : "ellipsis"}>
           <Editor 
             readOnly={true}
             editorState={editorState}
+          />
+        </div>
+        <div style={{textAlign: "center"}}>
+          <input
+            onClick={this.openImmediateView}
+            className="read-more-btn"
+            type="button"
+            value="Read More"
           />
         </div>
       </div>
@@ -50,6 +54,14 @@ export default class Post extends Component {
   }
 }
 
+const styles = {
+  button: {
+    marginTop: 10,
+    textAlign: 'center',
+  },
+}
+
 Post.propTypes = {
   postData: PropTypes.object.isRequired,
+
 }

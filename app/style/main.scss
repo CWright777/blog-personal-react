@@ -3,12 +3,17 @@ $deepAqua: #003B46;
 $ocean: #07575B;
 $wave: #66A5AD;
 $textWhite: #f3f2ff;
-$fa-font-path: "../node_modules/font-awesome/fonts";
+$fa-font-path: "../../node_modules/font-awesome/fonts";
 
 @import "bourbon";
 @import "~bourbon-neat/app/assets/stylesheets/neat";
 @import url(https://fonts.gstatic.com/s/opensans/v13/k3k702ZOKiLJc3WVjuplzBampu5_7CjHW5spxoeN3Vs.woff2);
 @import '~font-awesome/scss/font-awesome.scss';
+@import "./better-bourbon-buttons/bbb.scss";
+@font-face {
+  font-family: "LCDExpanded";
+  src: url('Lcd-Expanded.ttf')  format('truetype');
+}
 
 * {
   margin: 0;
@@ -24,14 +29,12 @@ body {
   background-color: $deepAqua;
   height: 100px;
   h1 {
-    text-align: right;
+    text-align: center;
     height: 100%;
     color: $textWhite;
     text-shadow: 2px 2px black;
-    font-size: 2em;
-    span {
-      margin-right: 30px;
-    }
+    font-size: 2.5em;
+    font-family: "LCDExpanded";
     &:before {
       content: '';
       display: inline-block;
@@ -72,6 +75,9 @@ body {
     font-size: .9em;
     padding: 0 0 .3em 2em;
     margin-bottom: 2px;
+  }
+  .read-more-btn {
+    @include bbb-flat-style($wave, white);
   }
 }
 
@@ -151,7 +157,7 @@ body {
 .ellipsis {
   overflow: hidden;
   position: relative;
-  height: 6.5em;
+  height: 6.47em;
   line-height: 1.3em;
 
   &:before {
@@ -168,14 +174,14 @@ body {
   }
 
   &:after {
-    content: "\02026 Read More"; 
+    content: "\02026 continued"; 
 
     box-sizing: content-box;
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
 
     float: right; position: relative;
-    top: -17px; left: 100%; 
+    top: -16px; left: 100%; 
     width: 7em; margin-left: -7em;
     padding-right: 5px;
     
@@ -205,7 +211,5 @@ body {
   i, &:after {
     font-style: normal; 
     color: $deepAqua;
-
-    &:before { content: "Read More";}
   }
 }

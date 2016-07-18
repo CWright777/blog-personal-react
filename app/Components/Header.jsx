@@ -7,7 +7,12 @@ export default class Header extends Component {
       <div>
         <div className="header">
           <h1>
-            <span>Cliff's Blog</span>
+            <span>
+              <FontAwesome
+                name='terminal'
+                style={{marginRight: "10px"}}
+              />Cliff's Blog
+            </span>
           </h1>
         </div>
         <div className="navbar">
@@ -40,8 +45,3 @@ export default class Header extends Component {
                 //size='2x'
                 //spin 
               ///>
-          <ul className="navbar">
-            <li>Blog</li>
-            <li>GitHub</li>
-            <li>Contact</li>
-          </ul>
