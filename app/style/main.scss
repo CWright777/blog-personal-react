@@ -20,6 +20,11 @@ $fa-font-path: "../../node_modules/font-awesome/fonts";
   padding: 0;
 }
 
+a {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+}
+
 body {
   background: $seafoam;
   font-family: 'Open Sans', sans-serif;

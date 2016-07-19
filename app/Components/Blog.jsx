@@ -26,10 +26,9 @@ export class Blog extends Component {
     <div>
       <Header />
       <div className="container">
-        {!this.props.isArticleView ? <Posting
-          onArticleView={(postId) => this.yo(postId)}
+        <Posting
           posts={this.props.posts || []}
-        /> : <ArticleView post={this.props.post}/>}
+        />
       </div>
     </div>
     )
@@ -39,22 +38,17 @@ export class Blog extends Component {
 function mapStateToProps(state) {
   const {
     isFetching,
-    lastUpdated,
-    isArticleView,
     posts,
     post
   } = state || {
     isFetching: true,
-    isArticleView: false,
     post: {},
     posts: {}
   }
   return {
-    isArticleView,
     post,
     posts,
     isFetching,
-    lastUpdated,
   }
 }
 

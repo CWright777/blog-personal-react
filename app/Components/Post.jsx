@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import Dotdotdot from 'react-dotdotdot';
 import HtmlToReact from 'html-to-react';
+import { Link } from 'react-router'
 import {
   Editor,
   EditorState,
@@ -34,7 +35,11 @@ export default class Post extends Component {
     var contentState = editorState.getCurrentContent();
     return(
       <div className="blog-post">
-        <h1 onClick={this.openArticleView}>{postData.title}</h1>
+        <h1>
+          <Link to={`/blog/${postData.id}`}>
+            {postData.title}
+          </Link>
+        </h1>
         <h4>Clifford Wright • {this.props.postData.created_at} • Subject: {postData.subject}</h4>
         <div>
         </div>

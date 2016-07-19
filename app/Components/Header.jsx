@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import FontAwesome from 'react-fontawesome';
+import { Link } from 'react-router'
 
 export default class Header extends Component {
   render(){
@@ -18,14 +19,18 @@ export default class Header extends Component {
         <div className="navbar">
           <ul>
             <li>
-              <FontAwesome
-                name='keyboard-o'
-              /> Blog
+              <Link to={'/'}>
+                <FontAwesome
+                  name='keyboard-o'
+                /> Blog
+              </Link>
             </li>
             <li>
-              <FontAwesome
-                name='github'
-              /> GitHub
+              <a href="https://github.com/CWright777">
+                <FontAwesome
+                  name='github'
+                /> GitHub
+              </a>
             </li>
             <li>
               <FontAwesome

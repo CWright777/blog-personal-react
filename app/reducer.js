@@ -16,19 +16,16 @@ function posts(state = {
     case 'REQUEST_POSTS':
       return Object.assign({}, state, {
         isFetching: true,
-        isArticleView: false,
       })
     case 'RECEIVE_POSTS':
       return Object.assign({}, state, {
         isFetching: false,
         posts: action.posts,
-        isArticleView: false,
         lastUpdated: action.receivedAt
       })
     case 'RECEIVE_POST':
       return Object.assign({}, state, {
         isFetching: false,
-        isArticleView: true,
         post: action.posts,
       })
     case 'RECEIVE_CREATE_POST':

@@ -13,6 +13,7 @@ import * as actionCreators from './action_creators';
 import App from './components/App.jsx';
 import { BloggingContainer } from './components/Blog.jsx';
 import { PostingAreaContainer } from './components/PostingArea.jsx'
+import { ArticleContainer } from './components/ArticleView.jsx'
 
 const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })
 const loggerMiddleware = createLogger()
@@ -28,7 +29,7 @@ const store = createStore(
 const routes = <Route component={App}>
   <Route path="/" component={BloggingContainer}/>
   <Route path="/post" component={PostingAreaContainer}/>
-  <Route path="/blog/:article" />
+  <Route path="/blog/:postId" component={ArticleContainer}/>
 </Route>;
 
 ReactDOM.render(
