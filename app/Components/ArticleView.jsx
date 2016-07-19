@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Header from './Header.jsx';
 import { connect } from 'react-redux';
 import { fetchPost } from '../reducer';
+import DisqusThread from 'react-disqus-thread';
 import {
   Editor,
   EditorState,
@@ -31,6 +32,10 @@ export default class ArticleView extends Component {
               editorState={editorState}
             />
           </div>
+          <DisqusThread
+            shortname="cliffblog"
+            identifier={this.props.post.title}
+          />
         </div> : "" }
       </div>
     )

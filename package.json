@@ -41,6 +41,7 @@
     "node-neat": "^1.7.2",
     "react": "^15.2.0",
     "react-bootstrap": "^0.29.5",
+    "react-disqus-thread": "^0.4.0",
     "react-dom": "^15.2.0",
     "react-dotdotdot": "^1.0.16",
     "react-ellipsis": "0.0.3",
