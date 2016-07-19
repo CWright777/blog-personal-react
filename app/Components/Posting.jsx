@@ -11,7 +11,11 @@ export default class Posting extends Component {
     return(
       <div className="posting">
         {this.props.posts.map((postData, i) =>
-          <Post key={i} postData={postData} />
+          <Post 
+            key={i}
+            postData={postData}
+            onArticleView={this.props.onArticleView}
+          />
         )}
       </div>
     )

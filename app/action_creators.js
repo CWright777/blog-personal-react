@@ -4,6 +4,20 @@ export function requestPosts() {
   };
 }
 
+export function requestPost() {
+  return {
+    type: 'REQUEST_POST',
+  };
+}
+
+export function receivePost(json) {
+  return {
+    type: 'RECEIVE_POST',
+    posts: json,
+    receivedAt: Date.now()
+  }
+}
+
 function receivePosts(json) {
   return {
     type: 'RECEIVE_POSTS',
@@ -23,8 +37,8 @@ export function fetchPosts() {
   }
 }
 
+
 export function requestCreatePost(postInfo) {
-  console.log('sadds')
   return {
     type: 'REQUEST_CREATE_POST',
     postInfo

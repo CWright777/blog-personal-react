@@ -28,6 +28,7 @@ const store = createStore(
 const routes = <Route component={App}>
   <Route path="/" component={BloggingContainer}/>
   <Route path="/post" component={PostingAreaContainer}/>
+  <Route path="/blog/:article" />
 </Route>;
 
 ReactDOM.render(

@@ -1,5 +1,5 @@
 import {List, Map} from 'immutable';
-import { requestCreatePost, responseCreatePost } from './action_creators'
+import { requestCreatePost, responseCreatePost, requestPost, receivePost } from './action_creators'
 import api from './Util/api'
 
 function setState(state, newState) {
@@ -12,15 +12,24 @@ function posts(state = {
 }, action) {
   switch (action.type) {
     case 'REQUEST_CREATE_POST':
+    case 'REQUEST_POST':
     case 'REQUEST_POSTS':
       return Object.assign({}, state, {
         isFetching: true,
+        isArticleView: false,
       })
     case 'RECEIVE_POSTS':
       return Object.assign({}, state, {
         isFetching: false,
         posts: action.posts,
+        isArticleView: false,
         lastUpdated: action.receivedAt
+      })
+    case 'RECEIVE_POST':
+      return Object.assign({}, state, {
+        isFetching: false,
+        isArticleView: true,
+        post: action.posts,
       })
     case 'RECEIVE_CREATE_POST':
       return Object.assign({}, state, {
@@ -36,6 +45,8 @@ export default function(state = Map(), action) {
     case 'REQUEST_CREATE_POST':
     case 'RESPONSE_CREATE_POST':
     case 'REQUEST_POSTS':
+    case 'REQUEST_POST':
+    case 'RECEIVE_POST':
     case 'RECEIVE_POSTS':
       return Object.assign({}, state, 
         posts(state,action)
@@ -50,5 +61,16 @@ export function createPost(post){
     dispatch(requestCreatePost())
     api.addPost(post)
       .then(json => dispatch(responseCreatePost(json)))
+  }
+}
+
+export function fetchPost(postId) {
+  return (dispatch) => {
+    dispatch(requestPost())
+    fetch(`http://localhost:3000/posts/${postId}`,{
+      mode: 'cors',
+    })
+      .then(response => response.json())
+      .then(json => dispatch(receivePost(json)))
   }
 }

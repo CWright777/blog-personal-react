@@ -24,6 +24,9 @@ export default class Post extends Component {
     this.openImmediateView = () => {
       this.setState({immediateView: !this.state.immediateView})
     }
+    this.openArticleView = () => {
+      this.props.onArticleView(this.props.postData.id)
+    }
   }
   render(){
     const {editorState} = this.state;
@@ -31,7 +34,7 @@ export default class Post extends Component {
     var contentState = editorState.getCurrentContent();
     return(
       <div className="blog-post">
-        <h1>{postData.title}</h1>
+        <h1 onClick={this.openArticleView}>{postData.title}</h1>
         <h4>Clifford Wright • {this.props.postData.created_at} • Subject: {postData.subject}</h4>
         <div>
         </div>
@@ -63,5 +66,4 @@ const styles = {
 
 Post.propTypes = {
   postData: PropTypes.object.isRequired,
-
 }
