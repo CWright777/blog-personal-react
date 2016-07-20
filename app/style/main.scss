@@ -79,16 +79,19 @@ body {
     color: #575757;
     font-size: .9em;
     padding: 0 0 .3em 2em;
-    margin-bottom: 2px;
+    margin-bottom: 20px;
   }
   .read-more-btn {
     @include bbb-flat-style($wave, white);
+    margin-bottom: 1em;
   }
 }
 
 .blog-post {
   border-bottom: 1px dashed $wave;
   margin-top: 40px;
+  line-height: 1.3em;
+  
 }
 
 .RichEditor-root {
@@ -162,14 +165,14 @@ body {
 .ellipsis {
   overflow: hidden;
   position: relative;
-  height: 6.47em;
+  height: 12.6em;
   line-height: 1.3em;
 
   &:before {
     content:"";
     float: left;
     width: 5px;
-    height: 6em;
+    height: 12.6em;
   }
 
   & > *:first-child {
@@ -186,7 +189,7 @@ body {
     -moz-box-sizing: content-box;
 
     float: right; position: relative;
-    top: -16px; left: 100%; 
+    top: -21px; left: 100%; 
     width: 7em; margin-left: -7em;
     padding-right: 5px;
     

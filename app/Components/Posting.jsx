@@ -14,7 +14,6 @@ export default class Posting extends Component {
           <Post 
             key={i}
             postData={postData}
-            onArticleView={this.props.onArticleView}
           />
         )}
       </div>

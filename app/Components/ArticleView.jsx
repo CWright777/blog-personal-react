@@ -12,10 +12,10 @@ import {
 export default class ArticleView extends Component {
   constructor(props) {
     super(props)
+    console.log(this)
   }
   componentDidMount(){
     const { dispatch } = this.props;
-    console.log(this)
     fetchPost(this.props.params.postId)(dispatch)
   }
   render(){
@@ -23,7 +23,7 @@ export default class ArticleView extends Component {
     return(
       <div>
         <Header />
-        {this.props.post ? <div className="posting">
+        {this.props.post && this.props.post.id == this.props.params.postId ? <div className="posting">
           <h1>{this.props.post.title}</h1>
           <h4>Clifford Wright • {this.props.post.created_at} • Subject: {this.props.post.subject}</h4>
           <div style={{textAlign: "justify"}}>
@@ -36,7 +36,7 @@ export default class ArticleView extends Component {
             shortname="cliffblog"
             identifier={this.props.post.title}
           />
-        </div> : "" }
+        </div> : <div></div>}
       </div>
     )
   }
