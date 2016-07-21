@@ -22,15 +22,6 @@ export default class RichEditor extends Component {
     this.handleKeyCommand = (command) => this._handleKeyCommand(command);
     this.toggleBlockType = (type) => this._toggleBlockType(type);
     this.toggleInlineStyle = (style) => this._toggleInlineStyle(style);
-    this.createPost = () => {
-      const content = convertToRaw(this.state.editorState.getCurrentContent());
-      const payload = {
-        createdAt: Date.now(),
-        subject: "React",
-        title: "Web development is rad",
-        content
-      }
-    }
   }
 
   _handleKeyCommand(command) {
@@ -91,7 +82,7 @@ export default class RichEditor extends Component {
             editorState={editorState}
             handleKeyCommand={this.handleKeyCommand}
             onChange={this.onChange}
-            placeholder="Tell a story..."
+            placeholder=""
             ref="editor"
             spellCheck={true}
           />

@@ -3,6 +3,7 @@ const Webpack = require('webpack');
 const merge = require('webpack-merge');
 const NpmInstallPlugin = require('npm-install-webpack-plugin');
 const Neat = require('node-neat').includePaths.concat('./node_modules/breakpoint-sass/stylesheets/')
+const AnimateSCSS = require('animate.scss').includePaths
 
 const TARGET = process.env.npm_lifecycle_event;
 const PATHS = {
@@ -32,7 +33,7 @@ const common = {
       //},
       {
         test: /\.scss$/,
-        loader: "style!css!sass?includePaths[]=" + [Neat[0][0],Neat[1]],
+        loader: "style!css!sass?includePaths[]=" + [Neat[0][0],Neat[1],AnimateSCSS[0]],
         include: PATHS.app
       },
       {

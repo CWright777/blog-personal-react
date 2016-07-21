@@ -8,11 +8,12 @@ import {
   EditorState,
   convertFromRaw
 } from 'draft-js'
+//import './Util/scroll.js'
+import jQuery from 'jquery'
 
 export default class ArticleView extends Component {
   constructor(props) {
     super(props)
-    console.log(this)
   }
   componentDidMount(){
     const { dispatch } = this.props;
@@ -35,6 +36,7 @@ export default class ArticleView extends Component {
           <DisqusThread
             shortname="cliffblog"
             identifier={this.props.post.title}
+            className="yolo"
           />
         </div> : <div></div>}
       </div>

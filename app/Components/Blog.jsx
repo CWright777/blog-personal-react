@@ -17,10 +17,6 @@ export class Blog extends Component {
     const { dispatch } = this.props;
     fetchPosts()(dispatch)
   }
-  yo(postId){
-    const { dispatch } = this.props;
-    fetchPost(postId)(dispatch)
-  }
   render(){
     return (
     <div>

@@ -1,8 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import FontAwesome from 'react-fontawesome';
 import { Link } from 'react-router'
+//import Animate from 'react-animate'
 
 export default class Header extends Component {
+  constructor(props) {
+    super(props)
+  }
   render(){
     return(
       <div>
@@ -33,9 +37,11 @@ export default class Header extends Component {
               </a>
             </li>
             <li>
-              <FontAwesome
-                name='send'
-              /> Contact
+              <Link to={'/contact'}>
+                <FontAwesome
+                  name='send'
+                /> Contact
+              </Link>
             </li>
           </ul>
         </div>

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import Dotdotdot from 'react-dotdotdot';
 import HtmlToReact from 'html-to-react';
 import { Link } from 'react-router'
+import FontAwesome from 'react-fontawesome';
 import {
   Editor,
   EditorState,
@@ -25,9 +26,12 @@ export default class Post extends Component {
     this.openImmediateView = () => {
       this.setState({immediateView: !this.state.immediateView})
     }
-    this.openArticleView = () => {
-      this.props.onArticleView(this.props.postData.id)
-    }
+  }
+  componentDidMount() {
+    DISQUSWIDGETS.getCount({reset:true});
+  }
+  componentDidUpdate() {
+    DISQUSWIDGETS.getCount({reset:true});
   }
   render(){
     const {editorState} = this.state;
@@ -43,19 +47,25 @@ export default class Post extends Component {
         <h4>Clifford Wright • {this.props.postData.created_at} • Subject: {postData.subject}</h4>
         <div>
         </div>
-        <div style={{textAlign: "justify"}} className={this.state.immediateView ? "" : "ellipsis"}>
+        <div style={{textAlign: "justify"}} className={this.state.immediateView ? "else" : "ellipsis"}>
           <Editor 
             readOnly={true}
             editorState={editorState}
           />
         </div>
-        <div style={{textAlign: "center"}}>
-          <input
+        <div className="post-footer">
+          <Link to={`/blog/${postData.id}`} >
+            Comments <span className="disqus-comment-count" data-disqus-identifier={this.props.postData.title}></span>
+          </Link>
+          <button
             onClick={this.openImmediateView}
             className="read-more-btn"
-            type="button"
-            value="Read More"
-          />
+          >
+            <FontAwesome
+              className={this.state.immediateView ? "down-arrow" : "up-arrow"}
+              name='arrow-down'
+            />
+          </button>
         </div>
       </div>
     )

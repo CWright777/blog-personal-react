@@ -10,6 +10,8 @@ $fa-font-path: "../../node_modules/font-awesome/fonts";
 @import url(https://fonts.gstatic.com/s/opensans/v13/k3k702ZOKiLJc3WVjuplzBampu5_7CjHW5spxoeN3Vs.woff2);
 @import '~font-awesome/scss/font-awesome.scss';
 @import "./better-bourbon-buttons/bbb.scss";
+@import "~animate.scss/vendor/assets/stylesheets/animate/bounce.scss";
+
 @font-face {
   font-family: "LCDExpanded";
   src: url('Lcd-Expanded.ttf')  format('truetype');
@@ -28,6 +30,15 @@ a {
 body {
   background: $seafoam;
   font-family: 'Open Sans', sans-serif;
+}
+
+.outer-container {
+  @include outer-container;
+}
+
+.contact-editor {
+  @include span-columns(4);
+  @include shift(4);
 }
 
 .header {
@@ -83,7 +94,25 @@ body {
   }
   .read-more-btn {
     @include bbb-flat-style($wave, white);
+    border: 1px solid white;
+    font-size: 1.5em;
+    margin-top: .5em;
+  }
+  .post-footer {
+    font-size: 1em;
+    display: flex;
+    margin-right: 5em;
+    margin-left: 5em;
     margin-bottom: 1em;
+    justify-content: space-between;
+    align-items: flex-end;
+    span {
+      letter-spacing: 2px;
+    }
+    a {
+      color:$ocean;
+      font-weight: bolder;
+    }
   }
 }
 
@@ -91,7 +120,6 @@ body {
   border-bottom: 1px dashed $wave;
   margin-top: 40px;
   line-height: 1.3em;
-  
 }
 
 .RichEditor-root {
@@ -162,12 +190,25 @@ body {
   textAlign: 'center';
 }
 
+.else {
+  //@include transform(translateY(20px));
+  @include transition(all 1s ease-in); 
+  //@include transition(all 2s ease-out); 
+  max-height: 40vh;
+  overflow: hidden;
+  &:after {
+    content: "";
+  }
+}
+
 .ellipsis {
+  //@include transform(translateY(20px));
+  @include transition(all 1s ease-out); 
   overflow: hidden;
   position: relative;
-  height: 12.6em;
+  max-height: 12.6em;
   line-height: 1.3em;
-
+  
   &:before {
     content:"";
     float: left;
@@ -184,6 +225,7 @@ body {
   &:after {
     content: "\02026 continued"; 
 
+    @include transition(all 1s ease); 
     box-sizing: content-box;
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
@@ -220,4 +262,43 @@ body {
     font-style: normal; 
     color: $deepAqua;
   }
+}
+
+//flashes
+$base-spacing: 1.5em !default;
+$flashes: (
+  "alert": #fff6bf,
+  "error": #fbe3e4,
+  "notice": #e5edf8,
+  "success": #e6efc2,
+) !default;
+
+@each $flash-type, $color in $flashes {
+  .flash-#{$flash-type} {
+    background-color: $color;
+    color: shade($color, 60%);
+    display: block;
+    margin-bottom: $base-spacing / 2;
+    padding: $base-spacing / 2;
+    text-align: center;
+
+    a {
+      color: shade($color, 70%);
+      text-decoration: underline;
+
+      &:focus,
+      &:hover {
+        color: shade($color, 90%);
+      }
+    }
+  }
+}
+
+.up-arrow {
+  @include transition(all 1s ease); 
+}
+
+.down-arrow {
+  @include transition(all 1s ease); 
+  @include transform(rotate(180deg));
 }

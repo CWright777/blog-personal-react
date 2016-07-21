@@ -27,6 +27,7 @@
     "webpack-merge": "^0.14.0"
   },
   "dependencies": {
+    "animate.scss": "0.0.6",
     "bourbon": "^4.2.7",
     "css-loader": "^0.23.1",
     "dompurify": "^0.8.2",
@@ -36,10 +37,12 @@
     "font-awesome": "^4.6.3",
     "html-to-react": "^1.0.0",
     "immutable": "^3.8.1",
+    "jquery": "^3.1.0",
     "json-loader": "^0.5.4",
     "muicss": "^0.6.7",
     "node-neat": "^1.7.2",
     "react": "^15.2.0",
+    "react-animate": "^3.0.0",
     "react-bootstrap": "^0.29.5",
     "react-disqus-thread": "^0.4.0",
     "react-dom": "^15.2.0",
@@ -48,11 +51,13 @@
     "react-fontawesome": "^1.1.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.5.2",
+    "react-validation": "^1.7.5",
     "reducer": "^0.19.2",
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.1.0",
     "style-loader": "^0.13.1",
-    "url-loader": "^0.5.7"
+    "url-loader": "^0.5.7",
+    "validator": "^5.5.0"
   }
 }

@@ -14,6 +14,7 @@ import App from './components/App.jsx';
 import { BloggingContainer } from './components/Blog.jsx';
 import { PostingAreaContainer } from './components/PostingArea.jsx'
 import { ArticleContainer } from './components/ArticleView.jsx'
+import { Contact } from './components/Contact.jsx'
 
 const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })
 const loggerMiddleware = createLogger()
@@ -30,6 +31,7 @@ const routes = <Route component={App}>
   <Route path="/" component={BloggingContainer}/>
   <Route path="/post" component={PostingAreaContainer}/>
   <Route path="/blog/:postId" component={ArticleContainer}/>
+  <Route path="/contact" component={Contact}/>
 </Route>;
 
 ReactDOM.render(
