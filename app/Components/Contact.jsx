@@ -1,46 +1,36 @@
 import React, { Component, PropTypes } from 'react';
-import Header from './Header.jsx';
 import RichEditor from './RichEditor.jsx';
-import Validation from 'react-validation'
 
-export class Contact extends Component {
+export default class Contact extends Component {
   constructor(props) {
     super(props)
-    this.onSubmit = (event) => {
-      event.preventDefault();
-      if (this.refs.form.forceValidate(true)) {
-
-      }
-    }
   }
   render(){
     return(
-      <div>
-        <Header />
-        <div className="outer-container">
-          <div className="content-editor">
-            <h1 style={headingStyle}>Want to reach me? Send me a message with the form below!</h1>
-            <div style={headingStyle}>
-              <h3>
-                <label style={emailLabelStyle}>Email:</label>
-                <Validation.Form onSubmit={this.onSubmit} ref='form'>
-                  <Validation.Input
-                    name="email"
-                    ref="email"
-                    validations={[
-                      {
-                        rule: 'isRequired',
-                      },
-                      {
-                        rule: 'isEmail',
-                      }
-                    ]}
-                  />
-                </Validation.Form>
-              </h3>
-            </div>
-            <RichEditor 
-            />
+      <div className='texture'>
+        <div style={modalHeaderStyle} className="texture-normal"><h2 style={headingStyle}>Got something to say!?</h2></div><div style={modalLowerStripStyle}></div>
+        <div className="contact-modal">
+          <div style={headingStyle}>
+            <h3>
+              <label style={labelStyle}>Email:</label>
+              <input 
+                style={inputStyle}
+                type="text"
+              />
+            </h3>
+            <br/>
+            <h3>
+              <label>
+                Message:
+              </label>
+            </h3>
+          </div>
+          <div style={{padding:"2.5em",paddingTop:".5em"}}>
+            <RichEditor />
+          </div>
+          <div style={{textAlign: "center",paddingBottom:"2em"}}>
+            <button style={{marginRight:"2.5em"}} className="danger-btn">Cancel</button>
+            <button className="ocean-btn">Send</button>
           </div>
         </div>
       </div>
@@ -49,13 +39,35 @@ export class Contact extends Component {
 }
 
 const headingStyle = {
-  backgroundColor: "white",
-  padding: "1em",
-  marginBottom: "1em",
-  border: "1px solid #ddd",
+  padding: "1.5em",
+  paddingBottom: ".5em"
 }
 
-const emailLabelStyle = {
+const modalHeaderStyle = {
+  backgroundColor: "#07575B",
+  color: "white",
+  borderTopRightRadius: "15px",
+  borderTopLeftRadius: "15px",
+  marginTop: "-1px"
+}
+
+const labelStyle = {
   marginRight: "1em",
-  letterSpacint: "1px",
+  minWidth: "20em",
+  letterSpacing: "1px",
+}
+
+const inputStyle = {
+  fontSize: "1rem",
+}
+
+const spaceBetweenStyle = {
+  alignItems: "flex-end",
+  justifyContent: "space-between"
+}
+
+const modalLowerStripStyle = {
+  backgroundColor: "#07575B",
+  height: "18px",
+  width: "100%"
 }

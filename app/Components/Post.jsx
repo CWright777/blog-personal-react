@@ -20,8 +20,8 @@ export default class Post extends Component {
       editorState: EditorState.createWithContent(convertFromRaw(Object.assign({}, JSON.parse(props.postData.content), {entityMap: {}}))),
       immediateView: false,
     }
-    this.formatDate = () => {
-      return new Date (parseInt(this.props.postData.createdAt)).toDateString()
+    this.formatDate = (date) => {
+      return new Date (parseInt(Date.parse(date))).toDateString()
     }
     this.openImmediateView = () => {
       this.setState({immediateView: !this.state.immediateView})
@@ -44,7 +44,7 @@ export default class Post extends Component {
             {postData.title}
           </Link>
         </h1>
-        <h4>Clifford Wright • {this.props.postData.created_at} • Subject: {postData.subject}</h4>
+        <h4>Clifford Wright • {this.formatDate(this.props.postData.created_at)} • Subject: {postData.subject}</h4>
         <div>
         </div>
         <div style={{textAlign: "justify"}} className={this.state.immediateView ? "else" : "ellipsis"}>

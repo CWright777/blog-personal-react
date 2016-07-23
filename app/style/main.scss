@@ -11,6 +11,7 @@ $fa-font-path: "../../node_modules/font-awesome/fonts";
 @import '~font-awesome/scss/font-awesome.scss';
 @import "./better-bourbon-buttons/bbb.scss";
 @import "~animate.scss/vendor/assets/stylesheets/animate/bounce.scss";
+@import "./texture.scss";
 
 @font-face {
   font-family: "LCDExpanded";
@@ -28,7 +29,10 @@ a {
 }
 
 body {
-  background: $seafoam;
+  //background: $seafoam;
+  $texture-top-background: lighten($seafoam, 1%);
+  $texture-bottom-background: darken($seafoam, 8%);
+  @include texture(180deg, $texture-top-background, $texture-bottom-background, 67, 1);
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -42,7 +46,11 @@ body {
 }
 
 .header {
-  background-color: $deepAqua;
+  //background-color: $deepAqua;
+  $texture-top-background: lighten($deepAqua, 1%);
+  $texture-bottom-background: darken($deepAqua, 8%);
+  @include texture(180deg, $texture-top-background, $texture-bottom-background, 67, 1);
+
   height: 100px;
   h1 {
     text-align: center;
@@ -62,7 +70,10 @@ body {
 
 .navbar {
   text-align: center;
-  background-color: $ocean;
+  //background-color: $ocean;
+  $texture-bottom-background: lighten($ocean, 1%);
+  $texture-top-background: darken($ocean, 5%);
+  @include texture(180deg, $texture-top-background, $texture-bottom-background, 67, 1);
   margin-bottom: 30px;
   li {
     font-size: 1.1em;
@@ -94,6 +105,7 @@ body {
   }
   .read-more-btn {
     @include bbb-flat-style($wave, white);
+    @include texture(180deg, $wave, $wave, 63, 0);
     border: 1px solid white;
     font-size: 1.5em;
     margin-top: .5em;
@@ -128,6 +140,7 @@ body {
   font-family: 'Georgia', serif;
   font-size: 14px;
   padding: 15px;
+  min-height: 20em;
 
   .RichEditor-editor {
     border-top: 1px solid #ddd;
@@ -184,10 +197,6 @@ body {
   .RichEditor-activeButton {
     color: #5890ff;
   }
-}
-.button {
-  marginTop: 10;
-  textAlign: 'center';
 }
 
 .else {
@@ -302,3 +311,40 @@ $flashes: (
   @include transition(all 1s ease); 
   @include transform(rotate(180deg));
 }
+
+.contact-modal {
+  .danger-btn {
+    @include bbb-flat-style(#E06153, white);
+    @include texture(180deg, #E06153, #E06153, 62, 1);
+    justify-content: space-between;
+    align-items: flex-end;
+    min-width: 7em;
+  }
+  .ocean-btn {
+    @include bbb-flat-style($wave, white);
+    @include texture(180deg, $wave, $wave, 62, 1);
+    justify-content: space-between;
+    align-items: flex-end;
+    min-width: 7em;
+  }
+}
+
+
+// The mixin above should preferably be in a file of its own. Below is the code for the object that has the texture.
+
+.texture {
+  @include texture(180deg, $seafoam, $seafoam, 67, 1);
+
+  $texture-top-background: lighten($ocean, 1%);
+  $texture-bottom-background: darken($ocean, 10%);
+  .texture-normal {
+    // gradient color 1, gradient color 2, gradient angle, texture-number, 0=inverted or 1=normal
+    @include texture(180deg, $texture-top-background, $texture-bottom-background, 67, 1);
+  }
+
+  .texture-inverted {
+    // gradient color 1, gradient color 2, gradient angle, texture-number, 0=inverted or 1=normal
+    @include texture(180deg, $texture-top-background, $texture-bottom-background, 67, 0);
+  }
+}
+
