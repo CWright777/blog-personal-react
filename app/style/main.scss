@@ -82,6 +82,12 @@ body {
     margin-left: 15px;
     padding: .3em;
   }
+  a {
+    cursor: pointer;
+    &:hover {
+      color: black;
+    }
+  }
 }
 
 .posting {
@@ -96,6 +102,9 @@ body {
     text-rendering: optimizeLegibility;
     text-indent: -2px;
     margin-bottom: 5px;
+    &:hover {
+      color: $ocean;
+    }
   }
   h4 {
     color: #575757;
@@ -124,6 +133,9 @@ body {
     a {
       color:$ocean;
       font-weight: bolder;
+      &:hover {
+        color: black;
+      }
     }
   }
 }
@@ -203,7 +215,7 @@ body {
   //@include transform(translateY(20px));
   @include transition(all 1s ease-in); 
   //@include transition(all 2s ease-out); 
-  max-height: 40vh;
+  max-height: 100vh;
   overflow: hidden;
   &:after {
     content: "";
@@ -348,3 +360,5 @@ $flashes: (
   }
 }
 
+.comment-link {
+}

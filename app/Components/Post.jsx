@@ -3,6 +3,7 @@ import Dotdotdot from 'react-dotdotdot';
 import HtmlToReact from 'html-to-react';
 import { Link } from 'react-router'
 import FontAwesome from 'react-fontawesome';
+import ReactHeight from 'react-height';
 import {
   Editor,
   EditorState,
@@ -47,14 +48,16 @@ export default class Post extends Component {
         <h4>Clifford Wright • {this.formatDate(this.props.postData.created_at)} • Subject: {postData.subject}</h4>
         <div>
         </div>
-        <div style={{textAlign: "justify"}} className={this.state.immediateView ? "else" : "ellipsis"}>
-          <Editor 
-            readOnly={true}
-            editorState={editorState}
-          />
-        </div>
+        <ReactHeight onHeightReady={height => console.log(height)}>
+          <div style={{textAlign: "justify"}} className={this.state.immediateView ? "else" : "ellipsis"}>
+            <Editor 
+              readOnly={true}
+              editorState={editorState}
+            />
+          </div>
+        </ReactHeight>
         <div className="post-footer">
-          <Link to={`/blog/${postData.id}`} >
+          <Link to={`/blog/${postData.id}`} className="comment-link">
             Comments <span className="disqus-comment-count" data-disqus-identifier={this.props.postData.title}></span>
           </Link>
           <button
