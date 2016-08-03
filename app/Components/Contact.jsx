@@ -12,7 +12,7 @@ export default class Contact extends Component {
         <div className="contact-modal">
           <div style={headingStyle}>
             <h3>
-              <label style={labelStyle}>Email:</label>
+              <label style={labelStyle}>Your Email:</label>
               <input 
                 style={inputStyle}
                 type="text"

@@ -1,3 +1,5 @@
+import bluebird from 'bluebird';
+
 export function requestPosts() {
   return {
     type: 'REQUEST_POSTS',
@@ -26,17 +28,31 @@ function receivePosts(json) {
   }
 }
 
-export function fetchPosts() {
+export function fetchPosts(page) {
   return (dispatch) => {
     dispatch(requestPosts())
-    fetch('http://localhost:3000/posts',{
+    fetch('http://localhost:3000/posts?page=1',{
       mode: 'cors',
     })
-      .then(response => response.json())
-      .then(json => dispatch(receivePosts(json)))
+    .then(response => formatResponse(response))
+    .then(result => dispatch(receivePosts(result)))
   }
 }
 
+function formatResponse(response) {
+  return bluebird.coroutine(function* formatResponsePromise() {
+    try {
+      return {
+        perPage: response.headers.get('Per-Page'),
+        pageNum: response.headers.get('Total'),
+        json: yield response.json()
+      }
+    } catch (err) {
+      throw err;
+    }
+  })();
+  
+}
 
 export function requestCreatePost(postInfo) {
   return {

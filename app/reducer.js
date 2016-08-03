@@ -20,7 +20,9 @@ function posts(state = {
     case 'RECEIVE_POSTS':
       return Object.assign({}, state, {
         isFetching: false,
-        posts: action.posts,
+        posts: action.posts.json,
+        pageNum: Number(action.posts.pageNum),
+        perPage: Number(action.posts.perPage),
         lastUpdated: action.receivedAt
       })
     case 'RECEIVE_POST':

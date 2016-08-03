@@ -5,15 +5,13 @@ import { fetchPosts } from '../action_creators';
 import { fetchPost } from '../reducer';
 import Posting from './Posting.jsx'
 import ArticleView from './ArticleView.jsx'
+import ReactPaginate from 'react-paginate';
 
 export class Blog extends Component {
   constructor(props) {
     super(props)
   }
   componentDidMount(){
-    this.fetchData()
-  }
-  fetchData(){
     const { dispatch } = this.props;
     fetchPosts()(dispatch)
   }
@@ -26,6 +24,11 @@ export class Blog extends Component {
           posts={this.props.posts || []}
         />
       </div>
+      <ReactPaginate 
+        previousLabel={"previous"}
+        nextLabel={"next"}
+        pageNum={Math.ceil(this.props.pageNum/this.props.perPage)}
+      />
     </div>
     )
   }
@@ -35,16 +38,22 @@ function mapStateToProps(state) {
   const {
     isFetching,
     posts,
-    post
+    post,
+    pageNum,
+    perPage
   } = state || {
     isFetching: true,
     post: {},
-    posts: {}
+    posts: [],
+    pageNum: 1,
+    perPage: 5
   }
   return {
     post,
     posts,
     isFetching,
+    pageNum,
+    perPage
   }
 }
 

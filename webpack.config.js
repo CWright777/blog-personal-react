@@ -15,7 +15,7 @@ process.env.BABEL_ENV = TARGET;
 
 const common = {
   entry: {
-    app: PATHS.app
+    app: ['babel-polyfill',PATHS.app]
   },
   resolve: {
     extensions: ['', '.js', '.jsx']

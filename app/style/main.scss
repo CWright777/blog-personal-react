@@ -213,9 +213,9 @@ body {
 
 .else {
   //@include transform(translateY(20px));
-  @include transition(all 1s ease-in); 
+  //@include transition(all 1s ease-in); 
   //@include transition(all 2s ease-out); 
-  max-height: 100vh;
+  //max-height: 100vh;
   overflow: hidden;
   &:after {
     content: "";
@@ -224,7 +224,7 @@ body {
 
 .ellipsis {
   //@include transform(translateY(20px));
-  @include transition(all 1s ease-out); 
+  //@include transition(all 1s ease-out); 
   overflow: hidden;
   position: relative;
   max-height: 12.6em;
@@ -246,7 +246,7 @@ body {
   &:after {
     content: "\02026 continued"; 
 
-    @include transition(all 1s ease); 
+    //@include transition(all 1s ease); 
     box-sizing: content-box;
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
@@ -316,11 +316,11 @@ $flashes: (
 }
 
 .up-arrow {
-  @include transition(all 1s ease); 
+  @include transition(all .3s ease); 
 }
 
 .down-arrow {
-  @include transition(all 1s ease); 
+  @include transition(all .3s ease); 
   @include transform(rotate(180deg));
 }
 
