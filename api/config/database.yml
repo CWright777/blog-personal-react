@@ -21,10 +21,12 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
+  adapter: postgresql
+  pool: 5
+  timeout: 5000
   database: postgresql
   encoding: utf8
   database: cliff_blog_api_production
   pool: 5
-  username: <%= ENV["DB_USERNAME"]
-  password: <%= ENV["DB_PASSWORD"]
+  username: <%= ENV["DB_USERNAME"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
