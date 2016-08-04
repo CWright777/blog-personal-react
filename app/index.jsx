@@ -3,8 +3,9 @@ import './style/main.scss';
 import 'font-awesome/css/font-awesome.css'
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Route, useRouterHistory} from 'react-router';
-import { createHashHistory } from 'history'
+import {Router, Route, useRouterHistory, applyRouterMiddleware} from 'react-router';
+import createBrowserHistory from 'history/lib/createBrowserHistory';
+import useScroll from 'react-router-scroll';
 import { createStore, applyMiddleware } from 'redux';
 import {Provider} from 'react-redux';
 import thunkMiddleware from 'redux-thunk'
@@ -17,7 +18,7 @@ import { PostingAreaContainer } from './components/PostingArea.jsx'
 import { ArticleContainer } from './components/ArticleView.jsx'
 import { Contact } from './components/Contact.jsx'
 
-const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })
+const appHistory = useRouterHistory(createBrowserHistory)();
 const loggerMiddleware = createLogger()
 
 const store = createStore(
@@ -28,8 +29,9 @@ const store = createStore(
   )
 );
 
-const routes = <Route component={App}>
+const routes = <Route component={App} >
   <Route path="/" component={BloggingContainer}/>
+  <Route path="/blog/:pageNum" component={BloggingContainer}/>
   <Route path="/post" component={PostingAreaContainer}/>
   <Route path="/blog/:postId" component={ArticleContainer}/>
   <Route path="/contact" component={Contact}/>
@@ -37,7 +39,7 @@ const routes = <Route component={App}>
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={appHistory}>{routes}</Router>
+    <Router history={appHistory} render={applyRouterMiddleware(useScroll())}>{routes}</Router>
   </Provider>,
   document.getElementById('app')
 );

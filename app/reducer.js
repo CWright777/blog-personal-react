@@ -21,7 +21,7 @@ function posts(state = {
       return Object.assign({}, state, {
         isFetching: false,
         posts: action.posts.json,
-        pageNum: Number(action.posts.pageNum),
+        totalItems: Number(action.posts.totalItems),
         perPage: Number(action.posts.perPage),
         lastUpdated: action.receivedAt
       })

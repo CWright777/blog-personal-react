@@ -9,7 +9,7 @@ export default class Posting extends Component {
   }
   render(){
     return(
-      <div className="posting">
+      <div>
         {this.props.posts.map((postData, i) =>
           <Post 
             key={i}

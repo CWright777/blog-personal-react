@@ -1,34 +1,51 @@
 import React, { Component, PropTypes } from 'react'
+import { withRouter } from 'react-router'
 import Header from './Header.jsx';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../action_creators';
 import { fetchPost } from '../reducer';
 import Posting from './Posting.jsx'
 import ArticleView from './ArticleView.jsx'
+import FontAwesome from 'react-fontawesome';
 import ReactPaginate from 'react-paginate';
 
 export class Blog extends Component {
   constructor(props) {
     super(props)
+    this.handlePageClick = (click) => {
+      const selected = click.selected+1
+      const { dispatch } = this.props;
+      fetchPosts(selected)(dispatch)
+      this.props.router.push(`#/blog/${selected}`)
+    }
   }
   componentDidMount(){
     const { dispatch } = this.props;
-    fetchPosts()(dispatch)
+    fetchPosts(this.props.params.pageNum)(dispatch)
   }
   render(){
     return (
     <div>
-      <Header />
-      <div className="container">
-        <Posting
-          posts={this.props.posts || []}
+      <div className="main">
+        <Header />
+        <div className="posting">
+          <Posting
+            posts={this.props.posts || []}
+          />
+        </div>
+        <div id="bs"></div>
+      </div>
+      <div className="footer">
+        <ReactPaginate 
+          previousLabel={<FontAwesome name='angle-left' size="2x"/>}
+          nextLabel={<FontAwesome name='angle-right' size="2x"/>}
+          pageNum={Math.ceil(this.props.totalItems/this.props.perPage)}
+          containerClassName={"pagination"}
+          clickCallback={this.handlePageClick}
+          activeClassName={"active"}
+          initialSelected={Number(this.props.params.pageNum || 1) - 1}
         />
       </div>
-      <ReactPaginate 
-        previousLabel={"previous"}
-        nextLabel={"next"}
-        pageNum={Math.ceil(this.props.pageNum/this.props.perPage)}
-      />
     </div>
     )
   }
@@ -39,20 +56,22 @@ function mapStateToProps(state) {
     isFetching,
     posts,
     post,
-    pageNum,
-    perPage
+    totalItems,
+    perPage,
+    context
   } = state || {
     isFetching: true,
     post: {},
     posts: [],
-    pageNum: 1,
+    totalItems: 1,
     perPage: 5
   }
   return {
     post,
     posts,
     isFetching,
-    pageNum,
+    totalItems,
+    context,
     perPage
   }
 }
@@ -64,4 +83,4 @@ function mapStateToProps(state) {
   //dispatch: PropTypes.func.isRequired
 //}
 
-export const BloggingContainer = connect(mapStateToProps)(Blog)
+export const BloggingContainer = connect(mapStateToProps)(withRouter(Blog))

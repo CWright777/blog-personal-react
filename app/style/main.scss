@@ -12,7 +12,9 @@ $fa-font-path: "../../node_modules/font-awesome/fonts";
 @import "./better-bourbon-buttons/bbb.scss";
 @import "~animate.scss/vendor/assets/stylesheets/animate/bounce.scss";
 @import "./texture.scss";
+@import "~compass-mixins/lib/compass/layout/_sticky-footer.scss";
 
+@include sticky-footer(4em, ".main", "#bs", ".footer");
 @font-face {
   font-family: "LCDExpanded";
   src: url('Lcd-Expanded.ttf')  format('truetype');
@@ -29,11 +31,17 @@ a {
 }
 
 body {
-  //background: $seafoam;
   $texture-top-background: lighten($seafoam, 1%);
   $texture-bottom-background: darken($seafoam, 8%);
   @include texture(180deg, $texture-top-background, $texture-bottom-background, 67, 1);
   font-family: 'Open Sans', sans-serif;
+}
+#app {
+  min-height: 100%;
+}
+
+#app div:first-of-type {
+  min-height: 100%;
 }
 
 .outer-container {
@@ -94,6 +102,7 @@ body {
   @include span-columns(5.5);
   @include shift(6.5/2);
   font-size: modular-scale(0);
+  float: initial;
   h1 {
     //font-weight: bolder;
     letter-spacing: -1px;
@@ -316,11 +325,11 @@ $flashes: (
 }
 
 .up-arrow {
-  @include transition(all .3s ease); 
+  @include transition(all .5s ease); 
 }
 
 .down-arrow {
-  @include transition(all .3s ease); 
+  @include transition(all .45s ease); 
   @include transform(rotate(180deg));
 }
 
@@ -360,5 +369,52 @@ $flashes: (
   }
 }
 
-.comment-link {
+.pagination {
+  display: block;
+  text-align: center;
+  font-size: 1.2em;
+  height: 4em;
+  padding: 1em 0 1em 0;
+  $texture-bottom-background: lighten($ocean, 1%);
+  $texture-top-background: darken($ocean, 5%);
+  @include texture(180deg, $texture-top-background, $texture-bottom-background, 67, 1);
+  color: $textWhite;
+  vertical-align: middle;  
+  line-height: 2em;
+
+  ul {
+  }
+
+  li {
+    margin-left: .6em;
+    margin-right: .6em;
+  }
+
+  li, ul {
+    display: inline-block;
+  }
+
+  .selected {
+  }
+
+  .previous {
+    float: left;
+  @include shift(1.7);
+  }
+
+  @include direction-context(right-to-left) {
+    .next {
+      float: right;
+      @include shift(1.7);
+    }
+  }
+
+  .active {
+    width: 2em;
+    height: 2em;
+    border: 1px solid black;
+    border-radius: 2em;
+    -moz-border-radius: 2em;
+    -webkit-border-radius: 2em;
+  }
 }

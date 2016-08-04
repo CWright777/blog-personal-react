@@ -28,10 +28,10 @@ function receivePosts(json) {
   }
 }
 
-export function fetchPosts(page) {
+export function fetchPosts(page=1) {
   return (dispatch) => {
     dispatch(requestPosts())
-    fetch('http://localhost:3000/posts?page=1',{
+    fetch(`http://localhost:3000/posts?page=${page}`,{
       mode: 'cors',
     })
     .then(response => formatResponse(response))
@@ -44,7 +44,7 @@ function formatResponse(response) {
     try {
       return {
         perPage: response.headers.get('Per-Page'),
-        pageNum: response.headers.get('Total'),
+        totalItems: response.headers.get('Total'),
         json: yield response.json()
       }
     } catch (err) {
