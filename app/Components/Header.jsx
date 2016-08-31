@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import FontAwesome from 'react-fontawesome';
 import { Link } from 'react-router'
-import Contact from './Contact.jsx';
+import { Contact } from './Contact.jsx';
 //import Animate from 'react-animate'
 import Modal from 'react-modal';
 
@@ -77,11 +77,3 @@ const customStyles = {
     transform             : 'translate(-50%, -50%)'
   }
 };
-
-
-              //<FontAwesome
-                //className='super-crazy-colors'
-                //name='rocket'
-                //size='2x'
-                //spin 
-              ///>

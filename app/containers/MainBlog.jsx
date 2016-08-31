@@ -1,22 +1,22 @@
 import React, { Component, PropTypes } from 'react'
 import { withRouter } from 'react-router'
-import Header from './Header.jsx';
+import Header from '../components/Header.jsx';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../action_creators';
 import { fetchPost } from '../reducer';
-import Posting from './Posting.jsx'
-import ArticleView from './ArticleView.jsx'
+import BlogPosting from '../components/BlogPosting.jsx'
+import ArticleView from '../containers/ArticleView.jsx'
 import FontAwesome from 'react-fontawesome';
 import ReactPaginate from 'react-paginate';
 
-export class Blog extends Component {
+export class MainBlog extends Component {
   constructor(props) {
     super(props)
     this.handlePageClick = (click) => {
       const selected = click.selected+1
       const { dispatch } = this.props;
       fetchPosts(selected)(dispatch)
-      this.props.router.push(`#/blog/${selected}`)
+      this.props.router.push(`#/page/${selected}`)
     }
   }
   componentDidMount(){
@@ -25,15 +25,14 @@ export class Blog extends Component {
   }
   render(){
     return (
-    <div>
+    <div style={{height: "100%"}}>
       <div className="main">
         <Header />
         <div className="posting">
-          <Posting
+          <BlogPosting
             posts={this.props.posts || []}
           />
         </div>
-        <div id="bs"></div>
       </div>
       <div className="footer">
         <ReactPaginate 
@@ -76,11 +75,11 @@ function mapStateToProps(state) {
   }
 }
 
-//Blog.propTypes = {
+//MainBlog.propTypes = {
   //posts: PropTypes.object.isRequired,
   //isFetching: PropTypes.bool.isRequired,
   //lastUpdated: PropTypes.number,
   //dispatch: PropTypes.func.isRequired
 //}
 
-export const BloggingContainer = connect(mapStateToProps)(withRouter(Blog))
+export const BloggingContainer = connect(mapStateToProps)(withRouter(MainBlog))

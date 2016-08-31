@@ -1,17 +1,16 @@
-import React, { Component, PropTypes } from 'react'
-import Post from './Post'
+import React, { Component, PropTypes } from 'react';
+import BlogPost from './BlogPost';
 
-
-export default class Posting extends Component {
+export default class BlogPosting extends Component {
   constructor(props) {
     super(props)
-    this.posts = this.props.posts || []
+    this.posts = this.props.posts || [];
   }
   render(){
     return(
       <div>
         {this.props.posts.map((postData, i) =>
-          <Post 
+          <BlogPost 
             key={i}
             postData={postData}
           />
@@ -21,6 +20,6 @@ export default class Posting extends Component {
   }
 }
 
-//Posting.propTypes = {
+//BlogPosting.propTypes = {
   //posts: PropTypes.array.isRequired,
 //}

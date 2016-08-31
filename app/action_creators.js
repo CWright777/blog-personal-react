@@ -71,11 +71,11 @@ export function responseCreatePost(postInfo) {
 function shouldFetchPosts(state) {
   const posts = state.posts
   if (!posts) {
-    return true
+    return true;
   } else if (posts.isFetching) {
-    return false
+    return false;
   } else {
-    return posts.didInvalidate
+    console.log('There was an else...')
   }
 }
 

@@ -13,9 +13,9 @@ import createLogger from 'redux-logger'
 import reducer from './reducer';
 import * as actionCreators from './action_creators';
 import App from './components/App.jsx';
-import { BloggingContainer } from './components/Blog.jsx';
-import { PostingAreaContainer } from './components/PostingArea.jsx'
-import { ArticleContainer } from './components/ArticleView.jsx'
+import { BloggingContainer } from './containers/MainBlog.jsx';
+import { PublishBlogPost } from './containers/PublishBlogPost.jsx'
+import { ArticleContainer } from './containers/ArticleView.jsx'
 import { Contact } from './components/Contact.jsx'
 
 const appHistory = useRouterHistory(createBrowserHistory)();
@@ -31,10 +31,10 @@ const store = createStore(
 
 const routes = <Route component={App} >
   <Route path="/" component={BloggingContainer}/>
-  <Route path="/blog/:pageNum" component={BloggingContainer}/>
-  <Route path="/post" component={PostingAreaContainer}/>
-  <Route path="/blog/:postId" component={ArticleContainer}/>
-  <Route path="/contact" component={Contact}/>
+  <Route path="#/page/:pageNum" component={BloggingContainer}/>
+  <Route path="#/post" component={PublishBlogPost}/>
+  <Route path="#/blog/:postId" component={ArticleContainer}/>
+  <Route path="#/contact" component={Contact}/>
 </Route>;
 
 ReactDOM.render(

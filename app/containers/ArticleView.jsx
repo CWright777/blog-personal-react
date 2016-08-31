@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Header from './Header.jsx';
+import Header from '../components/Header.jsx';
 import { connect } from 'react-redux';
 import { fetchPost } from '../reducer';
 import DisqusThread from 'react-disqus-thread';
@@ -7,9 +7,9 @@ import {
   Editor,
   EditorState,
   convertFromRaw
-} from 'draft-js'
-//import './Util/scroll.js'
-import jQuery from 'jquery'
+} from 'draft-js';
+//import './Util/scroll.js';
+import jQuery from 'jquery';
 
 export default class ArticleView extends Component {
   constructor(props) {
@@ -52,13 +52,3 @@ function mapStateToProps(state) {
 }
 
 export const ArticleContainer = connect(mapStateToProps)(ArticleView)
-      //<div className="posting">
-        //<h1>{this.props.post.title}</h1>
-        //<h4>Clifford Wright • {this.props.post.created_at} • Subject: {this.props.post.subject}</h4>
-        //<div style={{textAlign: "justify"}}>
-          //<Editor
-            //readOnly={true}
-            //editorState={editorState}
-          ///>
-        //</div>
-      //</div>

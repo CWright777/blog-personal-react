@@ -14,7 +14,7 @@ $fa-font-path: "../../node_modules/font-awesome/fonts";
 @import "./texture.scss";
 @import "~compass-mixins/lib/compass/layout/_sticky-footer.scss";
 
-@include sticky-footer(4em, ".main", "#bs", ".footer");
+@include sticky-footer(3.5em, ".main", "#bs", ".footer");
 @font-face {
   font-family: "LCDExpanded";
   src: url('Lcd-Expanded.ttf')  format('truetype');
@@ -35,13 +35,10 @@ body {
   $texture-bottom-background: darken($seafoam, 8%);
   @include texture(180deg, $texture-top-background, $texture-bottom-background, 67, 1);
   font-family: 'Open Sans', sans-serif;
+  background-attachment: fixed;
 }
 #app {
-  min-height: 100%;
-}
-
-#app div:first-of-type {
-  min-height: 100%;
+  height: 100%;
 }
 
 .outer-container {
@@ -350,7 +347,6 @@ $flashes: (
   }
 }
 
-
 // The mixin above should preferably be in a file of its own. Below is the code for the object that has the texture.
 
 .texture {
@@ -372,9 +368,9 @@ $flashes: (
 .pagination {
   display: block;
   text-align: center;
-  font-size: 1.2em;
-  height: 4em;
-  padding: 1em 0 1em 0;
+  font-size: .9em;
+  padding: .8em 0 .5em 0;
+  height: 3.9em;
   $texture-bottom-background: lighten($ocean, 1%);
   $texture-top-background: darken($ocean, 5%);
   @include texture(180deg, $texture-top-background, $texture-bottom-background, 67, 1);
@@ -386,6 +382,7 @@ $flashes: (
   }
 
   li {
+    cursor: pointer;
     margin-left: .6em;
     margin-right: .6em;
   }
@@ -397,9 +394,12 @@ $flashes: (
   .selected {
   }
 
+  .break {
+    cursor: default;
+  }
   .previous {
     float: left;
-  @include shift(1.7);
+    @include shift(1.7);
   }
 
   @include direction-context(right-to-left) {
@@ -412,7 +412,7 @@ $flashes: (
   .active {
     width: 2em;
     height: 2em;
-    border: 1px solid black;
+    border: 1px solid $seafoam;
     border-radius: 2em;
     -moz-border-radius: 2em;
     -webkit-border-radius: 2em;

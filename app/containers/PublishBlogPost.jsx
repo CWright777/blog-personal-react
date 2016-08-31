@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react'
-import Header from './Header.jsx';
-import RichEditor from './RichEditor.jsx';
+import Header from '../components/Header.jsx';
+import RichEditor from '../components/RichEditor.jsx';
 import { connect } from 'react-redux';
 import { createPost } from '../reducer'
 import { convertToRaw } from 'draft-js'
 
-export class PostingArea extends Component {
+export class PublishBlogPost extends Component {
   constructor(props) {
     super(props)
     this.createPost = () => {
@@ -17,8 +17,6 @@ export class PostingArea extends Component {
       }
       createPost(payload)(props.dispatch)
     }
-  }
-  componentDidMount(){
   }
   render(){
     return(
@@ -48,7 +46,7 @@ export class PostingArea extends Component {
   }
 }
 
-//PostingArea.propTypes = {
+//PublishBlogPost.propTypes = {
   //posts: PropTypes.object.isRequired,
 //}
 
@@ -69,4 +67,5 @@ const styles = {
     textAlign: 'center',
   },
 }
-export const PostingAreaContainer = connect(mapStateToProps)(PostingArea)
+
+export default connect(mapStateToProps)(PublishBlogPost)
