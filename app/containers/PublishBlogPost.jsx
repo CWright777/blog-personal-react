@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import Header from '../components/Header.jsx';
+import { Header } from '../components/Header.jsx';
 import RichEditor from '../components/RichEditor.jsx';
 import { connect } from 'react-redux';
 import { createPost } from '../reducer'
@@ -8,6 +8,11 @@ import { convertToRaw } from 'draft-js'
 export class PublishBlogPost extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      modalIsOpen: false
+    }
+    this.openModal = () => {this.setState({modalIsOpen: true})}
+    this.closeModal = () => {this.setState({modalIsOpen: false})}
     this.createPost = () => {
       const content = JSON.stringify(convertToRaw(this.refs.richEditor.state.editorState.getCurrentContent()));
       const payload = {
@@ -21,7 +26,11 @@ export class PublishBlogPost extends Component {
   render(){
     return(
       <div>
-        <Header />
+        <Header 
+          openModal={this.openModal}
+          closeModal={this.closeModal}
+          modalIsOpen={this.state.modalIsOpen}
+        />
         Title: 
         <input
           type="textbox"

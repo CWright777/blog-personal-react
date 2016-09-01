@@ -18,7 +18,7 @@ export const BlogPostHeading = props => {
   return (
     <div>
       <h1>
-        <Link to={`/blog/${props.postData.id}`}>
+        <Link to={`#/blog/${props.postData.id}`}>
           {props.postData.title}
         </Link>
       </h1>
@@ -30,7 +30,7 @@ export const BlogPostHeading = props => {
 export const BlogPostFooter = props => {
   return (
     <div className="post-footer">
-      <Link to={`/blog/${props.postData.id}`} className="comment-link">
+      <Link to={`#/blog/${props.postData.id}`} className="comment-link">
         Comments <span className="disqus-comment-count" data-disqus-identifier={props.postData.title}></span>
       </Link>
       <button
@@ -46,52 +46,31 @@ export const BlogPostFooter = props => {
   )
 }
 
-export default class BlogPost extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      editorState: EditorState.createWithContent(convertFromRaw(Object.assign({}, JSON.parse(props.postData.content), {entityMap: {}}))),
-      immediateView: false,
-    }
-    this.formatDate = (date) => {
-      return new Date (parseInt(Date.parse(date))).toDateString()
-    }
-    this.openImmediateView = () => {
-      this.setState({immediateView: !this.state.immediateView})
-    }
+export const BlogPost = props => {
+  const formatDate = (date) => {
+    return new Date (parseInt(Date.parse(date))).toDateString()
   }
-  componentDidMount() {
-    DISQUSWIDGETS.getCount({reset:true});
-  }
-  componentDidUpdate() {
-    DISQUSWIDGETS.getCount({reset:true});
-  }
-  render(){
-    const {editorState} = this.state;
-    const postData = this.props.postData;
-    var contentState = editorState.getCurrentContent();
-    return(
-      <div className="blog-post">
-        <BlogPostHeading 
-          postData={postData}
-          formatDate={this.formatDate}
-        />
-        <ReactHeight onHeightReady={height => console.log(height)}>
-          <div style={{textAlign: "justify"}} className={this.state.immediateView ? "else" : "ellipsis"}>
-            <Editor 
-              readOnly={true}
-              editorState={editorState}
-            />
-          </div>
-        </ReactHeight>
-        <BlogPostFooter
-          postData={postData}
-          openImmediateView={this.openImmediateView}
-          immediateView={this.immediateView}
-        />
-      </div>
-    )
-  }
+  return(
+    <div className="blog-post">
+      <BlogPostHeading 
+        postData={props.postData}
+        formatDate={formatDate}
+      />
+      <ReactHeight onHeightReady={height => console.log(height)}>
+        <div style={{textAlign: "justify"}} className={props.immediateView ? "else" : "ellipsis"}>
+          <Editor 
+            readOnly={true}
+            editorState={props.editorState}
+          />
+        </div>
+      </ReactHeight>
+      <BlogPostFooter
+        postData={props.postData}
+        openImmediateView={props.openImmediateView}
+        immediateView={props.immediateView}
+      />
+    </div>
+  )
 }
 
 const styles = {

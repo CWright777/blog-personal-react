@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Header from '../components/Header.jsx';
+import { Header } from '../components/Header.jsx';
 import { connect } from 'react-redux';
 import { fetchPost } from '../reducer';
 import DisqusThread from 'react-disqus-thread';
@@ -14,6 +14,11 @@ import jQuery from 'jquery';
 export default class ArticleView extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      modalIsOpen: false
+    }
+    this.openModal = () => {this.setState({modalIsOpen: true})}
+    this.closeModal = () => {this.setState({modalIsOpen: false})}
   }
   componentDidMount(){
     const { dispatch } = this.props;
@@ -23,7 +28,11 @@ export default class ArticleView extends Component {
     const editorState = this.props.post ? EditorState.createWithContent(convertFromRaw(Object.assign({}, JSON.parse(this.props.post.content), {entityMap: {}}))) : {}
     return(
       <div>
-        <Header />
+        <Header 
+          openModal={this.openModal}
+          closeModal={this.closeModal}
+          modalIsOpen={this.state.modalIsOpen}
+        />
         {this.props.post && this.props.post.id == this.props.params.postId ? <div className="posting">
           <h1>{this.props.post.title}</h1>
           <h4>Clifford Wright • {this.props.post.created_at} • Subject: {this.props.post.subject}</h4>
@@ -38,7 +47,7 @@ export default class ArticleView extends Component {
             identifier={this.props.post.title}
             className="yolo"
           />
-        </div> : <div></div>}
+        </div> : null }
       </div>
     )
   }

@@ -3,7 +3,7 @@ import './style/main.scss';
 import 'font-awesome/css/font-awesome.css'
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Route, useRouterHistory, applyRouterMiddleware} from 'react-router';
+import { Router, Route, useRouterHistory, applyRouterMiddleware, IndexRoute } from 'react-router';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 import useScroll from 'react-router-scroll';
 import { createStore, applyMiddleware } from 'redux';
@@ -14,32 +14,36 @@ import reducer from './reducer';
 import * as actionCreators from './action_creators';
 import App from './components/App.jsx';
 import { BloggingContainer } from './containers/MainBlog.jsx';
-import { PublishBlogPost } from './containers/PublishBlogPost.jsx'
-import { ArticleContainer } from './containers/ArticleView.jsx'
-import { Contact } from './components/Contact.jsx'
+import { PublishBlogPost } from './containers/PublishBlogPost.jsx';
+import { ArticleContainer } from './containers/ArticleView.jsx';
+import { Contact } from './components/Contact.jsx';
+import configureStore from './store/configureStore';
 
-const appHistory = useRouterHistory(createBrowserHistory)();
-const loggerMiddleware = createLogger()
+const store = configureStore();
+//const appHistory = useRouterHistory(createBrowserHistory)();
+//const loggerMiddleware = createLogger()
 
-const store = createStore(
-  reducer,
-  applyMiddleware(
-    thunkMiddleware,
-    loggerMiddleware
-  )
-);
+//const store = createStore(
+  //reducer,
+  //applyMiddleware(
+    //thunkMiddleware,
+    //loggerMiddleware
+  //)
+//);
 
-const routes = <Route component={App} >
-  <Route path="/" component={BloggingContainer}/>
-  <Route path="#/page/:pageNum" component={BloggingContainer}/>
-  <Route path="#/post" component={PublishBlogPost}/>
-  <Route path="#/blog/:postId" component={ArticleContainer}/>
-  <Route path="#/contact" component={Contact}/>
-</Route>;
+const routes = (
+ <Route path="/" component={App} >
+    <IndexRoute component={BloggingContainer}/>
+    <Route path="page/:pageNum" component={BloggingContainer}/>
+    <Route path="blog/:postId" component={PublishBlogPost}/>
+    <Route path="post" component={PublishBlogPost}/>
+    <Route path="contact" component={Contact}/>
+  </Route>
+)
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={appHistory} render={applyRouterMiddleware(useScroll())}>{routes}</Router>
+    <Router >{routes}</Router>
   </Provider>,
   document.getElementById('app')
 );
