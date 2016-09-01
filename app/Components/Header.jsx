@@ -21,7 +21,7 @@ export const Header = props => {
       <div className="navbar">
         <ul>
           <li>
-            <Link to={'/#/page/1'}>
+            <Link to={'/'}>
               <FontAwesome
                 name='keyboard-o'
               /> Blog

@@ -3,8 +3,7 @@ import './style/main.scss';
 import 'font-awesome/css/font-awesome.css'
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, useRouterHistory, applyRouterMiddleware, IndexRoute } from 'react-router';
-import createBrowserHistory from 'history/lib/createBrowserHistory';
+import { Router, Route, createBrowserHistory, applyRouterMiddleware, IndexRoute } from 'react-router';
 import useScroll from 'react-router-scroll';
 import { createStore, applyMiddleware } from 'redux';
 import {Provider} from 'react-redux';
@@ -15,27 +14,17 @@ import * as actionCreators from './action_creators';
 import App from './components/App.jsx';
 import { BloggingContainer } from './containers/MainBlog.jsx';
 import { PublishBlogPost } from './containers/PublishBlogPost.jsx';
-import { ArticleContainer } from './containers/ArticleView.jsx';
+import { ArticleView } from './containers/ArticleView.jsx';
 import { Contact } from './components/Contact.jsx';
 import configureStore from './store/configureStore';
 
 const store = configureStore();
-//const appHistory = useRouterHistory(createBrowserHistory)();
-//const loggerMiddleware = createLogger()
-
-//const store = createStore(
-  //reducer,
-  //applyMiddleware(
-    //thunkMiddleware,
-    //loggerMiddleware
-  //)
-//);
 
 const routes = (
- <Route path="/" component={App} >
+ <Route path="/" component={App}  history={createBrowserHistory}>
     <IndexRoute component={BloggingContainer}/>
     <Route path="page/:pageNum" component={BloggingContainer}/>
-    <Route path="blog/:postId" component={PublishBlogPost}/>
+    <Route path="blog/:postId" component={ArticleView}/>
     <Route path="post" component={PublishBlogPost}/>
     <Route path="contact" component={Contact}/>
   </Route>

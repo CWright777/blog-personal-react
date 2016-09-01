@@ -46,6 +46,7 @@ export class MainBlog extends Component {
     DISQUSWIDGETS.getCount({reset:true});
   }
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps)
     if(nextProps.posts){
       const temp = {
         editorStates: {}
@@ -72,8 +73,9 @@ export class MainBlog extends Component {
           />
           <div className="posting">
             {
-              this.props.posts
-              ? (this.props.posts).map((postData, i) =>
+              this.props.isFetching
+              ? null
+              : (this.props.posts || []).map((postData, i) =>
                 <BlogPost 
                   key={postData.id}
                   postData={postData}
@@ -82,7 +84,6 @@ export class MainBlog extends Component {
                   openImmediateView={this.openImmediateView}
                 />
                 )
-              : null
             }
           </div>
         </div>
@@ -105,15 +106,14 @@ export class MainBlog extends Component {
 function mapStateToProps(state) {
   const {
     isFetching,
-    posts,
     post,
+    posts,
     totalItems,
     perPage,
     context
-  } = state || {
+  } = state.posts || {
     isFetching: true,
     post: {},
-    posts: [],
     totalItems: 1,
     perPage: 5
   }

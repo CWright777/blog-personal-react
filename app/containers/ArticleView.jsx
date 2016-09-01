@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Header } from '../components/Header.jsx';
 import { connect } from 'react-redux';
-import { fetchPost } from '../reducer';
+import { withRouter } from 'react-router'
+import { fetchPost } from '../action_creators';
 import DisqusThread from 'react-disqus-thread';
 import {
   Editor,
@@ -11,7 +12,7 @@ import {
 //import './Util/scroll.js';
 import jQuery from 'jquery';
 
-export default class ArticleView extends Component {
+export class ArticleView extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -22,7 +23,7 @@ export default class ArticleView extends Component {
   }
   componentDidMount(){
     const { dispatch } = this.props;
-    fetchPost(this.props.params.postId)(dispatch)
+    fetchPost(this.props.params.postId)
   }
   render(){
     const editorState = this.props.post ? EditorState.createWithContent(convertFromRaw(Object.assign({}, JSON.parse(this.props.post.content), {entityMap: {}}))) : {}
@@ -54,10 +55,28 @@ export default class ArticleView extends Component {
 }
 
 function mapStateToProps(state) {
-  const { post } = state || {
-    post: {}
+  console.log(state)
+  const {
+    isFetching,
+    post,
+    posts,
+    totalItems,
+    perPage,
+    context
+  } = state.posts || {
+    isFetching: true,
+    post: {},
+    totalItems: 1,
+    perPage: 5
   }
-  return {post}
+  return {
+    post,
+    posts,
+    isFetching,
+    totalItems,
+    context,
+    perPage
+  }
 }
 
-export const ArticleContainer = connect(mapStateToProps)(ArticleView)
+export default connect(mapStateToProps)(withRouter(ArticleView))

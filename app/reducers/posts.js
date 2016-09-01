@@ -5,7 +5,6 @@ import api from '../services/api'
 function posts(
   state = {
     isFetching: false,
-    posts: []
   }, action) {
   switch (action.type) {
     case 'REQUEST_CREATE_POST':
@@ -47,7 +46,7 @@ export default function(state = Map(), action) {
         posts(state,action)
       )
     default: 
-      return state;
+      return state.toJS();
   }
 }
 

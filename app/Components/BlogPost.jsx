@@ -18,7 +18,7 @@ export const BlogPostHeading = props => {
   return (
     <div>
       <h1>
-        <Link to={`#/blog/${props.postData.id}`}>
+        <Link to={`/blog/${props.postData.id}`}>
           {props.postData.title}
         </Link>
       </h1>
@@ -30,7 +30,7 @@ export const BlogPostHeading = props => {
 export const BlogPostFooter = props => {
   return (
     <div className="post-footer">
-      <Link to={`#/blog/${props.postData.id}`} className="comment-link">
+      <Link to={`/blog/${props.postData.id}`} className="comment-link">
         Comments <span className="disqus-comment-count" data-disqus-identifier={props.postData.title}></span>
       </Link>
       <button
