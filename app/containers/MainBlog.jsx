@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { withRouter } from 'react-router'
-import { Header } from '../components/Header.jsx';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import * as postActions from '../actions/posts'
 import { fetchPosts } from '../action_creators';
-import { fetchPost } from '../reducer';
 import { BlogPost } from '../components/BlogPost.jsx'
 import FontAwesome from 'react-fontawesome';
 import ReactPaginate from 'react-paginate';
@@ -20,7 +20,6 @@ export class MainBlog extends Component {
     this.state = {
       editorStates: {},
       immediateView: false,
-      modalIsOpen: false
     };
 
     this.openImmediateView = () => {
@@ -29,13 +28,9 @@ export class MainBlog extends Component {
 
     this.handlePageClick = (click) => {
       const selected = click.selected+1
-      const { dispatch } = this.props;
-      fetchPosts(selected)(dispatch)
-      this.props.router.push(`#/page/${selected}`)
+      postActions.fetchPosts(selected)
+      this.props.router.push(`/page/${selected}`)
     }
-    this.openModal = () => {this.setState({modalIsOpen: true})}
-    this.closeModal = () => {this.setState({modalIsOpen: false})}
-    //this.afterOpenModal = () => this.refs.subtitle.style.color = '#f00';
   }
   componentDidMount(){
     DISQUSWIDGETS.getCount({reset:true});
@@ -46,7 +41,6 @@ export class MainBlog extends Component {
     DISQUSWIDGETS.getCount({reset:true});
   }
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps)
     if(nextProps.posts){
       const temp = {
         editorStates: {}
@@ -66,11 +60,6 @@ export class MainBlog extends Component {
     return (
       <div style={{height: "100%"}}>
         <div className="main">
-          <Header 
-            openModal={this.openModal}
-            closeModal={this.closeModal}
-            modalIsOpen={this.state.modalIsOpen}
-          />
           <div className="posting">
             {
               this.props.isFetching
@@ -106,19 +95,16 @@ export class MainBlog extends Component {
 function mapStateToProps(state) {
   const {
     isFetching,
-    post,
     posts,
     totalItems,
     perPage,
     context
   } = state.posts || {
     isFetching: true,
-    post: {},
     totalItems: 1,
     perPage: 5
   }
   return {
-    post,
     posts,
     isFetching,
     totalItems,
@@ -127,11 +113,11 @@ function mapStateToProps(state) {
   }
 }
 
-//MainBlog.propTypes = {
-  //posts: PropTypes.object.isRequired,
-  //isFetching: PropTypes.bool.isRequired,
-  //lastUpdated: PropTypes.number,
-  //dispatch: PropTypes.func.isRequired
-//}
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(postActions, dispatch),
+    dispatch
+  }
+};
 
-export const BloggingContainer = connect(mapStateToProps)(withRouter(MainBlog))
+export const BloggingContainer = connect(mapStateToProps,mapDispatchToProps)(withRouter(MainBlog))

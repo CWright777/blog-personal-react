@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import { Header } from '../components/Header.jsx';
 import RichEditor from '../components/RichEditor.jsx';
 import { connect } from 'react-redux';
-import { createPost } from '../reducer'
 import { convertToRaw } from 'draft-js'
 
 export class PublishBlogPost extends Component {

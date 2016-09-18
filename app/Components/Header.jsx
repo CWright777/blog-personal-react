@@ -21,11 +21,11 @@ export const Header = props => {
       <div className="navbar">
         <ul>
           <li>
-            <Link to={'/'}>
+            <a href={'/'}>
               <FontAwesome
                 name='keyboard-o'
               /> Blog
-            </Link>
+            </a>
           </li>
           <li>
             <a href="https://github.com/CWright777">

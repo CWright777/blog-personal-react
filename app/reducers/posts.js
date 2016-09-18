@@ -46,7 +46,7 @@ export default function(state = Map(), action) {
         posts(state,action)
       )
     default: 
-      return state.toJS();
+      return state;
   }
 }
 
@@ -58,13 +58,13 @@ export function createPost(post){
   }
 }
 
-export function fetchPost(postId) {
-  return (dispatch) => {
-    dispatch(requestPost())
-    fetch(`http://localhost:3000/posts/${postId}`,{
-      mode: 'cors',
-    })
-      .then(response => response.json())
-      .then(json => dispatch(receivePost(json)))
-  }
-}
+//export function fetchPost(postId) {
+  //return (dispatch) => {
+    //dispatch(requestPost())
+    //fetch(`http://localhost:3000/posts/${postId}`,{
+      //mode: 'cors',
+    //})
+      //.then(response => response.json())
+      //.then(json => dispatch(receivePost(json)))
+  //}
+//}
