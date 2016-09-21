@@ -5,7 +5,6 @@ const NpmInstallPlugin = require('npm-install-webpack-plugin');
 const Neat = require('node-neat').includePaths.concat('./node_modules/breakpoint-sass/stylesheets/')
 const AnimateSCSS = require('animate.scss').includePaths
 //const Compass = require('compass-mixins/lib/compass')
-//console.log(Compass.includePaths)
 
 const TARGET = process.env.npm_lifecycle_event;
 const PATHS = {
@@ -24,7 +23,8 @@ const common = {
   },
   output: {
     path: PATHS.build,
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    //publicPath: 'https://blog.cliffordwright.com/'
   },
   module: {
     loaders: [
@@ -99,5 +99,14 @@ if(TARGET === 'start' || !TARGET) {
 }
 
 if(TARGET === 'build') {
-  module.exports = merge(common, {});
+  module.exports = merge(common, {
+    devtool: 'cheap-module-source-map',
+    plugins: [
+      new Webpack.optimize.CommonsChunkPlugin('common.js'),
+      new Webpack.optimize.DedupePlugin(),
+      new Webpack.optimize.UglifyJsPlugin(),
+      new Webpack.optimize.AggressiveMergingPlugin()
+    ]
+  });
 }
+

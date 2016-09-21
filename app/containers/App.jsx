@@ -16,7 +16,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{minHeight: '100%'}}>
         <Header 
           openModal={this.openModal}
           closeModal={this.closeModal}

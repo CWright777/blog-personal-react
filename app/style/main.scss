@@ -14,7 +14,6 @@ $fa-font-path: "../../node_modules/font-awesome/fonts";
 @import "./texture.scss";
 @import "~compass-mixins/lib/compass/layout/_sticky-footer.scss";
 
-@include sticky-footer(3.5em, ".main", "#bs", ".footer");
 @font-face {
   font-family: "LCDExpanded";
   src: url('Lcd-Expanded.ttf')  format('truetype');
@@ -25,14 +24,18 @@ $fa-font-path: "../../node_modules/font-awesome/fonts";
   padding: 0;
 }
 
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
 a {
   color: inherit; /* blue colors for links too */
   text-decoration: inherit; /* no underline */
 }
 
 body {
-  $texture-top-background: lighten($seafoam, 1%);
-  $texture-bottom-background: darken($seafoam, 8%);
+  $texture-top-background: $seafoam;
+  $texture-bottom-background: darken($seafoam, 5%);
   @include texture(180deg, $texture-top-background, $texture-bottom-background, 67, 1);
   font-family: 'Open Sans', sans-serif;
   background-attachment: fixed;
@@ -128,9 +131,7 @@ body {
   .post-footer {
     font-size: 1em;
     display: flex;
-    margin-right: 5em;
-    margin-left: 5em;
-    margin-bottom: 1em;
+    margin: 2em 5em 2em 5em;
     justify-content: space-between;
     align-items: flex-end;
     span {
@@ -267,14 +268,16 @@ body {
     background-size: 100% 100%;
     /* 1706x1 image, gradient for IE9. Transparent at 0% -> white at 15% -> white at 100%.*/  
     //background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABqoAAAABCAMAAACRxg/eAAAABGdBTUEAALGPC/xhBQAAAwBQTFRF////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////AAAA////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////wDWRdwAAAP90Uk5Tfet1sDrNWZIeSRDcocCFLWj1CbhSfuMl1EGoYJkYM8Zui/rwBk15FefYKrxGtKydZQzfIdDJNj1VpFyVcY6BBBwxw2yI/Pfy7RInQ09ie5B0eIMDD+kb5eEk2tbSMMs5QL66tkyyrqpYpl+fm5drAf0H+AoN8+4TFhkf3SIoKwDONDfHO8Q+wURHSlBTVlqiXWNmaZNvcox2iYZ/fAL+9vsFCPkL9A4R8e/sFOjqFxrm5B3i4CDeIybb2SnX1SzT0S/PMsw1yjjIxTzCP79CvbtFuUi3tUuzTrGvUa1Uq6lXp6Vbo16gYZ6cZJpnmJZqlG2RcI9zjYp6d4eChIAu7+D8pQAAASFJREFUOMtjqK+fG2y/UKVwkVDxEsOSZSFcyz3LV6tXrJOtXB/msImjaqtxzfZI8R1etbu16vbx/zsY63hYrvGoWdPxeJaWU+ZtZxIkz3l3XNTpvMzZdS1F9YZP922RnrsWvQ8y2PoeW014miX93HfiK4NJbwQmv89z/qgw9bPNtK8BTDN+Bqr98JvDIDr7r93voD98s365zPyuOP2b7Rf/T+xTPli/y30r8zrnpf6L7Gc8/U8sH2U+lLqffk/vTtot5pup13WvJl8RvpR0Qft84lne9tNOrSflm0+YHos7wtpwyORAzH6JvdF7NHdF7eSu3ma0JWKz2MbwDRprQtcyrvIoW6m8wr10qeB8t6LFSgtcC+b9HwWjYBSMglEw2AEA3ckkQdBniOMAAAAASUVORK5CYII=);
+    background-image: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/diagonal-noise.png");
 
 
     background: -webkit-gradient(linear, left top, right top,
-      from(rgba(255, 255, 255, 0)), to($seafoam), color-stop(15%, $seafoam));
-    background: -moz-linear-gradient(to right, rgba(255, 255, 255, 0), $seafoam 15%, $seafoam);     
-    background: -o-linear-gradient(to right, rgba(255, 255, 255, 0), $seafoam 15%, $seafoam);
-    background: -ms-linear-gradient(to right, rgba(255, 255, 255, 0), $seafoam 15%, $seafoam);
-    background: linear-gradient(to right, rgba(255, 255, 255, 0), $seafoam 15%, $seafoam);
+      from(rgba(255, 255, 255, 0)), to(darken($seafoam, 2%)), color-stop(15%, darken($seafoam, 2%)));
+    background: -moz-linear-gradient(to right, rgba(255, 255, 255, 0), darken($seafoam,2%) 15%, darken($seafoam,2%));     
+    background: -o-linear-gradient(to right, rgba(255, 255, 255, 0), darken($seafoam, 2%) 15%, darken($seafoam,2%));
+    background: -ms-linear-gradient(to right, rgba(255, 255, 255, 0), darken($seafoam, 2%) 15%, darken($seafoam,2%));
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), darken($seafoam,2%) 15%, darken($seafoam,2%)),
+    
   }
 
   a { 
@@ -346,6 +349,9 @@ $flashes: (
     min-width: 7em;
   }
 }
+.main {
+  flex: 1
+}
 
 // The mixin above should preferably be in a file of its own. Below is the code for the object that has the texture.
 
@@ -369,8 +375,8 @@ $flashes: (
   display: block;
   text-align: center;
   font-size: .9em;
-  padding: .8em 0 .5em 0;
-  height: 3.9em;
+  padding: 15px 0 0 0;
+  height: 60px;
   $texture-bottom-background: lighten($ocean, 1%);
   $texture-top-background: darken($ocean, 5%);
   @include texture(180deg, $texture-top-background, $texture-bottom-background, 67, 1);

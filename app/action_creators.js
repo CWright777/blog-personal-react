@@ -31,7 +31,7 @@ function receivePosts(json) {
 export function fetchPosts(page=1) {
   return (dispatch) => {
     dispatch(requestPosts())
-    fetch(`http://localhost:3000/posts?page=${page}`,{
+    fetch(`https://blog.cliffordwright.com/api/posts?page=${page}`,{
       mode: 'cors',
     })
     .then(response => formatResponse(response))
@@ -90,10 +90,18 @@ export function fetchPostsIfNeeded() {
 export function fetchPost(postId) {
   return (dispatch) => {
     dispatch(requestPost())
-    fetch(`http://localhost:3000/posts/${postId}`,{
+    fetch(`https://blog.cliffordwright.com/api/posts/${postId}`,{
       mode: 'cors',
     })
       .then(response => response.json())
       .then(json => dispatch(receivePost(json)))
+  }
+}
+
+export function createPost(post){
+  return (dispatch) => {
+    dispatch(requestCreatePost())
+    api.addPost(post)
+      .then(json => dispatch(responseCreatePost(json)))
   }
 }

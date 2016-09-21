@@ -5,7 +5,7 @@ const api = {
     return fetch(url).then((res) => res.json());
   },
   addPost(post){
-    const url = 'http://localhost:3000/posts';
+    const url = 'https://blog.cliffordwright.com/api/posts';
     return fetch(url, {
       mode: 'cors',
       method: 'post',

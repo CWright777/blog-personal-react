@@ -3,8 +3,7 @@ import { withRouter } from 'react-router'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import * as postActions from '../actions/posts'
-import { fetchPosts } from '../action_creators';
-import { BlogPost } from '../components/BlogPost.jsx'
+import { BlogPage } from '../components/BlogPost.jsx'
 import FontAwesome from 'react-fontawesome';
 import ReactPaginate from 'react-paginate';
 import {
@@ -19,62 +18,52 @@ export class MainBlog extends Component {
 
     this.state = {
       editorStates: {},
-      immediateView: false,
+      selectedImmediateView: null,
     };
 
-    this.openImmediateView = () => {
-      this.setState({immediateView: !this.state.immediateView})
+    this.openImmediateView = (postId) => {
+      const { selectedImmediateView } = this.state;
+      const isAlreadyOpen = selectedImmediateView === postId
+      this.setState({
+        selectedImmediateView: isAlreadyOpen ? null: postId
+      })
     }
 
     this.handlePageClick = (click) => {
       const selected = click.selected+1
-      postActions.fetchPosts(selected)
+      this.props.actions.fetchPosts(selected)
       this.props.router.push(`/page/${selected}`)
     }
   }
   componentDidMount(){
     DISQUSWIDGETS.getCount({reset:true});
     const { dispatch } = this.props;
-    fetchPosts(this.props.params.pageNum)(dispatch)
+    this.props.actions.fetchPosts(this.props.params.pageNum)
   }
   componentDidUpdate() {
     DISQUSWIDGETS.getCount({reset:true});
   }
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.posts){
-      const temp = {
-        editorStates: {}
-      }
-      nextProps.posts.forEach( post => {
-        temp.editorStates[post.id]= EditorState.createWithContent(
-          convertFromRaw(
-            Object.assign({}, JSON.parse(post.content), {entityMap: {}})
-          )
-        )
-      })
-      const newState = Object.assign({}, this.state, temp)
-      this.setState(newState)
-    }
-  }
   render(){
     return (
-      <div style={{height: "100%"}}>
-        <div className="main">
-          <div className="posting">
-            {
-              this.props.isFetching
-              ? null
-              : (this.props.posts || []).map((postData, i) =>
-                <BlogPost 
-                  key={postData.id}
-                  postData={postData}
-                  editorState={this.state.editorStates[postData.id]}
-                  immediateView={this.state.immediateView}
-                  openImmediateView={this.openImmediateView}
-                />
-                )
-            }
-          </div>
+    <div 
+      style={{
+        height: '100%',
+      }}
+    >
+      <div 
+        style={{
+          height: 'auto !important',
+          height: '100%',
+          minHeight: '100%',
+          margin: '0 auto 46px',
+        }}
+      >
+          <BlogPage 
+            posts={this.props.posts}
+            editorStates={this.state.editorStates}
+            selectedImmediateView={this.state.selectedImmediateView}
+            openImmediateView={postId => this.openImmediateView(postId)}
+          />
         </div>
         <div className="footer">
           <ReactPaginate 
@@ -100,7 +89,6 @@ function mapStateToProps(state) {
     perPage,
     context
   } = state.posts || {
-    isFetching: true,
     totalItems: 1,
     perPage: 5
   }

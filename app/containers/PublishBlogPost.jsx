@@ -3,6 +3,8 @@ import { Header } from '../components/Header.jsx';
 import RichEditor from '../components/RichEditor.jsx';
 import { connect } from 'react-redux';
 import { convertToRaw } from 'draft-js'
+import * as postActions from '../actions/posts'
+import { bindActionCreators } from 'redux'
 
 export class PublishBlogPost extends Component {
   constructor(props) {
@@ -19,17 +21,12 @@ export class PublishBlogPost extends Component {
         subject: this.refs.subject.value,
         title: this.refs.title.value,
       }
-      createPost(payload)(props.dispatch)
+      this.props.actions.createPost(payload)
     }
   }
   render(){
     return(
       <div>
-        <Header 
-          openModal={this.openModal}
-          closeModal={this.closeModal}
-          modalIsOpen={this.state.modalIsOpen}
-        />
         Title: 
         <input
           type="textbox"
@@ -76,4 +73,11 @@ const styles = {
   },
 }
 
-export default connect(mapStateToProps)(PublishBlogPost)
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(postActions, dispatch),
+    dispatch
+  }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(PublishBlogPost)

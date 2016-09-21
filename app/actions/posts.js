@@ -1,4 +1,9 @@
 import bluebird from 'bluebird';
+import api from '../services/api';
+import {
+  EditorState,
+  convertFromRaw,
+} from 'draft-js'
 
 export function requestPosts() {
   return {
@@ -13,7 +18,6 @@ export function requestPost() {
 }
 
 export function receivePost(json) {
-  console.log(json)
   return {
     type: 'RECEIVE_POST',
     post: json,
@@ -22,9 +26,12 @@ export function receivePost(json) {
 }
 
 function receivePosts(json) {
+  const { perPage, totalItems, posts } = json 
   return {
     type: 'RECEIVE_POSTS',
-    posts: json,
+    totalItems,
+    perPage,
+    posts,
     receivedAt: Date.now()
   }
 }
@@ -32,21 +39,37 @@ function receivePosts(json) {
 export function fetchPosts(page=1) {
   return (dispatch) => {
     dispatch(requestPosts())
-    fetch(`https://localhost:3000/posts?page=${page}`,{
+    fetch(`https://blog.cliffordwright.com/api/posts?page=${page}`,{
       mode: 'cors',
     })
     .then(response => formatResponse(response))
-    .then(result => dispatch(receivePosts(result)))
+    .then(posts => dispatch(receivePosts(posts)))
   }
 }
 
 function formatResponse(response) {
   return bluebird.coroutine(function* formatResponsePromise() {
     try {
+      const rawPosts = yield response.json();
+      const posts = rawPosts.map((post, i)=>{
+        const { id, subject, title } = post;
+        const createdAt = post.created_at
+        const rawContent = JSON.parse(post.content);
+        const editorState = convertFromRaw(Object.assign({}, rawContent, {entityMap: {}}));
+        const content = EditorState.createWithContent(editorState);
+        return {
+          id,
+          content,
+          subject,
+          title,
+          createdAt
+        }
+      })
+
       return {
-        perPage: response.headers.get('Per-Page'),
-        totalItems: response.headers.get('Total'),
-        json: yield response.json()
+        perPage: Number(response.headers.get('Per-Page')),
+        totalItems: Number(response.headers.get('Total')),
+        posts
       }
     } catch (err) {
       throw err;
@@ -91,10 +114,18 @@ export function fetchPostsIfNeeded() {
 export function fetchPost(postId) {
   return (dispatch) => {
     dispatch(requestPost())
-    fetch(`https://localhost:3000/posts/${postId}`,{
+    fetch(`https://blog.cliffordwright.com/api/posts/${postId}`,{
       mode: 'cors',
     })
       .then(response => response.json())
       .then(json => dispatch(receivePost(json)))
+  }
+}
+
+export function createPost(post){
+  return (dispatch) => {
+    dispatch(requestCreatePost())
+    api.addPost(post)
+      .then(json => dispatch(responseCreatePost(json)))
   }
 }

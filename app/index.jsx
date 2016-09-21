@@ -12,7 +12,7 @@ import createLogger from 'redux-logger'
 import * as actionCreators from './action_creators';
 import App from './containers/App.jsx';
 import { BloggingContainer } from './containers/MainBlog.jsx';
-import { PublishBlogPost } from './containers/PublishBlogPost.jsx';
+import PublishBlogPost from './containers/PublishBlogPost.jsx';
 import ArticleView from './containers/ArticleView.jsx';
 import { Contact } from './components/Contact.jsx';
 import configureStore from './store/configureStore';

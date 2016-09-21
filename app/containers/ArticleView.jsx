@@ -54,7 +54,6 @@ export class ArticleView extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state)
   const {
     isFetching,
     posts,
