@@ -3,7 +3,7 @@ import { withRouter } from 'react-router'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import * as postActions from '../actions/posts'
-import { BlogPage } from '../components/BlogPost.jsx'
+import { BlogPage } from '../Components/BlogPost.jsx'
 import FontAwesome from 'react-fontawesome';
 import ReactPaginate from 'react-paginate';
 import {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header } from '../components/Header.jsx';
+import { Header } from '../Components/Header.jsx';
 import MainBlog from '../containers/MainBlog';
 
 export default class App extends React.Component {

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import { Header } from '../components/Header.jsx';
-import RichEditor from '../components/RichEditor.jsx';
+import { Header } from '../Components/Header.jsx';
+import RichEditor from '../Components/RichEditor.jsx';
 import { connect } from 'react-redux';
 import { convertToRaw } from 'draft-js'
 import * as postActions from '../actions/posts'

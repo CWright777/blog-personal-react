@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Header } from '../components/Header.jsx';
+import { Header } from '../Components/Header.jsx';
 import { connect } from 'react-redux';
 import * as postActions from '../actions/posts'
 import { bindActionCreators } from 'redux'
